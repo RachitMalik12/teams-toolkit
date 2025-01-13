@@ -1,3 +1,103 @@
+### RELEASE release/5.12...release/5.13.1
+### Feature Commits
+
+#### Fx-core
+- [feat: notify if AAD manifest is already in new schema (#12935)](https://github.com/OfficeDev/Teams-toolkit/commit/ebb823065)
+- [feat: copilot plugin debugger (#12876)](https://github.com/OfficeDev/Teams-toolkit/commit/8f0fc4543)
+- [feat: add convert aad manifest to new schema in fx-core (#12928)](https://github.com/OfficeDev/Teams-toolkit/commit/7ab47da28)
+- [feat: update fx-core to support new Microsoft Entra schema (#12918)](https://github.com/OfficeDev/Teams-toolkit/commit/7c4410297)
+- [feat: support env variables in localization.json (#12889)](https://github.com/OfficeDev/Teams-toolkit/commit/82fefd956)
+- [feat: update walkthrough (#12863)](https://github.com/OfficeDev/Teams-toolkit/commit/d8674396d)
+- [feat: update create new project UI (#12847)](https://github.com/OfficeDev/Teams-toolkit/commit/64bb5b1c8)
+- [feat: update teams-js version (#12805)](https://github.com/OfficeDev/Teams-toolkit/commit/9551812fd)
+- [feat: remove copilot plugin feature flag and remove standalone api plugin (#12706)](https://github.com/OfficeDev/Teams-toolkit/commit/e84e1682b)
+- [feat: e2e support for multi-tenant (#12642)](https://github.com/OfficeDev/Teams-toolkit/commit/decc8f69b)
+- [feat: improved script action execution experience by using native terminal (#12675)](https://github.com/OfficeDev/Teams-toolkit/commit/a5e68adb9)
+
+#### CLI
+- [feat: display tenant name when user specify tenant id (#12845)](https://github.com/OfficeDev/Teams-toolkit/commit/34dee9431)
+- [feat: support tenant parameter for m365 & azure browser login in cli (#12837)](https://github.com/OfficeDev/Teams-toolkit/commit/bba16f7c4)
+- [feat: remove copilot plugin feature flag and remove standalone api plugin (#12706)](https://github.com/OfficeDev/Teams-toolkit/commit/e84e1682b)
+- [feat: improved script action execution experience by using native terminal (#12675)](https://github.com/OfficeDev/Teams-toolkit/commit/a5e68adb9)
+
+#### Extension Toolkit
+- [feat: improve walkthrough (#12959)](https://github.com/OfficeDev/Teams-toolkit/commit/bbe8c1cb0)
+- [feat: copilot plugin debugger (#12876)](https://github.com/OfficeDev/Teams-toolkit/commit/8f0fc4543)
+- [feat: update walkthrough (#12863)](https://github.com/OfficeDev/Teams-toolkit/commit/d8674396d)
+- [feat: update create new project UI (#12847)](https://github.com/OfficeDev/Teams-toolkit/commit/64bb5b1c8)
+- [feat: troubleshoot UI (#12851)](https://github.com/OfficeDev/Teams-toolkit/commit/54dd9cfbd)
+- [feat: support tenant parameter for m365 & azure browser login in cli (#12837)](https://github.com/OfficeDev/Teams-toolkit/commit/bba16f7c4)
+- [feat: agent deep link (#12825)](https://github.com/OfficeDev/Teams-toolkit/commit/0ca5277d8)
+- [feat: update getting started (#12796)](https://github.com/OfficeDev/Teams-toolkit/commit/fd8dfe63b)
+- [feat: login with specified tenant id in codespace (#12784)](https://github.com/OfficeDev/Teams-toolkit/commit/f1a239b0d)
+- [feat: remove copilot plugin feature flag and remove standalone api plugin (#12706)](https://github.com/OfficeDev/Teams-toolkit/commit/e84e1682b)
+- [feat: show progress bar when switching is not finished (#12753)](https://github.com/OfficeDev/Teams-toolkit/commit/a47b209a3)
+- [feat: e2e support for multi-tenant (#12642)](https://github.com/OfficeDev/Teams-toolkit/commit/decc8f69b)
+- [feat: improved script action execution experience by using native terminal (#12675)](https://github.com/OfficeDev/Teams-toolkit/commit/a5e68adb9)
+
+#### SDK
+
+
+#### SDK React
+
+
+#### .Net SDK
+
+
+### Fix Commits
+
+#### Fx-core
+- [fix: remove feature flag and change template ports](https://github.com/OfficeDev/Teams-toolkit/commit/465f4fb1c)
+- [fix: renaming](https://github.com/OfficeDev/Teams-toolkit/commit/98a35983b)
+- [fix: renaming](https://github.com/OfficeDev/Teams-toolkit/commit/c14a8b85c)
+- [fix: kiota scaffolding](https://github.com/OfficeDev/Teams-toolkit/commit/874899ad5)
+- [fix: renaming](https://github.com/OfficeDev/Teams-toolkit/commit/a19692647)
+- [fix: naming](https://github.com/OfficeDev/Teams-toolkit/commit/89dce8507)
+- [fix: improve terminate process error handling (#12811)](https://github.com/OfficeDev/Teams-toolkit/commit/61e936ba6)
+- [fix: string change about Office Add-in (#12774)](https://github.com/OfficeDev/Teams-toolkit/commit/9c784362c)
+- [fix: fix inject auth action (#12735)](https://github.com/OfficeDev/Teams-toolkit/commit/8abc127ff)
+- [fix: cli build output json file (#12728)](https://github.com/OfficeDev/Teams-toolkit/commit/515287696)
+- [fix: telemetry event and property should not contains number (#12709)](https://github.com/OfficeDev/Teams-toolkit/commit/7d4f6063e)
+- [fix: outlook add-in template manifest id should be a placeholder (#12699)](https://github.com/OfficeDev/Teams-toolkit/commit/77e05d1e1)
+- [fix: outlook add-in template (#12696)](https://github.com/OfficeDev/Teams-toolkit/commit/f4a253a9c)
+- [fix: use plural form](https://github.com/OfficeDev/Teams-toolkit/commit/846962f94)
+- [fix: capitalization](https://github.com/OfficeDev/Teams-toolkit/commit/6d19128ad)
+- [fix: \r\n](https://github.com/OfficeDev/Teams-toolkit/commit/e95c97320)
+- [fix: rename agent](https://github.com/OfficeDev/Teams-toolkit/commit/b309223f7)
+
+#### CLI
+- [fix: improve process loading ux for termination of process in debug (#12718)](https://github.com/OfficeDev/Teams-toolkit/commit/7072452d0)
+- [fix: update running pattern to include 'ready' status (#12719)](https://github.com/OfficeDev/Teams-toolkit/commit/1e0763330)
+- [fix: telemetry event and property should not contains number (#12709)](https://github.com/OfficeDev/Teams-toolkit/commit/7d4f6063e)
+
+#### Extension Toolkit
+- [fix: remove feature flag and change template ports](https://github.com/OfficeDev/Teams-toolkit/commit/465f4fb1c)
+- [fix: actions renaming](https://github.com/OfficeDev/Teams-toolkit/commit/5c3d78603)
+- [fix: renaming](https://github.com/OfficeDev/Teams-toolkit/commit/091f15fd8)
+- [fix: da with chat](https://github.com/OfficeDev/Teams-toolkit/commit/487c9f82b)
+- [fix: handler](https://github.com/OfficeDev/Teams-toolkit/commit/a7cf39ff2)
+- [fix: update agent hint handling in debug provider](https://github.com/OfficeDev/Teams-toolkit/commit/124dfdbf9)
+- [fix: welcome handler (#12957)](https://github.com/OfficeDev/Teams-toolkit/commit/4da5c3b2d)
+- [fix: load tenant id when getting user login status (#12872)](https://github.com/OfficeDev/Teams-toolkit/commit/af47bc3a8)
+- [fix: wording and welcome page (#12879)](https://github.com/OfficeDev/Teams-toolkit/commit/9c7073b8b)
+- [fix: github copilot only shown if non stable release (#12843)](https://github.com/OfficeDev/Teams-toolkit/commit/cca4aa936)
+- [fix: improve terminate process error handling (#12811)](https://github.com/OfficeDev/Teams-toolkit/commit/61e936ba6)
+- [fix: kill process silently (#12790)](https://github.com/OfficeDev/Teams-toolkit/commit/722920052)
+- [fix: upgrade dev-tunnel-ssh-tcp to 3.12.5](https://github.com/OfficeDev/Teams-toolkit/commit/4ec0b0bfa)
+- [fix: devtunnel not forwarding request](https://github.com/OfficeDev/Teams-toolkit/commit/3b653edd7)
+- [fix: improve process loading ux for termination of process in debug (#12718)](https://github.com/OfficeDev/Teams-toolkit/commit/7072452d0)
+- [fix: kill process tree sync (#12688)](https://github.com/OfficeDev/Teams-toolkit/commit/33efd3dbd)
+- [fix: kill process tree after debug terminate](https://github.com/OfficeDev/Teams-toolkit/commit/f6cb229e5)
+- [fix: end local debug session after sending event](https://github.com/OfficeDev/Teams-toolkit/commit/df958aa8b)
+
+#### SDK
+
+
+#### SDK React
+
+
+#### .Net SDK
+
 # Teams Toolkit Pre-release
 
 ## Changelog
