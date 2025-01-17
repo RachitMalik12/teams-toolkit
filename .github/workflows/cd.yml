@@ -96,7 +96,7 @@ jobs:
       - name: release alpha npm packages to npmjs.org
         if: ${{ true }}
         run: |
-          npx lerna version prerelease --preid=alpha.$(git rev-parse --short HEAD) --exact --no-push --yes --no-allow-branch
+          npx lerna version prerelease --preid=alpha.$(git rev-parse --short HEAD) --exact --no-push --allow-branch anchenyi/builder_api_with_shared_scope --yes
 
       - name: release preview packages to npmjs.org
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.preid == 'preview' }}
@@ -236,7 +236,7 @@ jobs:
       - name: publish alpha release to npm org
         if: ${{ true }}
         run: |
-          npx lerna publish from-package --dist-tag=alpha --yes --no-allow-branch
+          npx lerna publish from-package --dist-tag=alpha --allow-branch anchenyi/builder_api_with_shared_scope --yes
 
       - name: publish preview release to npm org
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.preid == 'preview' }}
