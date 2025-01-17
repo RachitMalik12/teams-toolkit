@@ -96,7 +96,7 @@ jobs:
       - name: release alpha npm packages to npmjs.org
         if: ${{ true }}
         run: |
-          npx lerna version prerelease --preid=alpha.$(git rev-parse --short HEAD) --exact --no-push --yes
+          npx lerna version prerelease --preid=alpha.$(git rev-parse --short HEAD) --exact --no-push --yes --no-allow-branch
 
       - name: release preview packages to npmjs.org
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.preid == 'preview' }}
@@ -234,9 +234,9 @@ jobs:
           git commit -m "build: update ai key"
 
       - name: publish alpha release to npm org
-        if: ${{ github.ref == 'refs/heads/dev'}}
+        if: ${{ true }}
         run: |
-          npx lerna publish from-package --dist-tag=alpha --yes --allow-branch dev
+          npx lerna publish from-package --dist-tag=alpha --yes --no-allow-branch
 
       - name: publish preview release to npm org
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.preid == 'preview' }}
