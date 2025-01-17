@@ -162,6 +162,11 @@ export class PackageService {
       if (appScope == AppScope.Shared) {
         shareLink = await this.getShareLink(token, res[0]);
       }
+      // temp changes, will remove
+      const pattern = /^https:\/\/m365\.cloud\.microsoft\/apps\/\?titleId=.+$/;
+      if (pattern.test(shareLink)) {
+        shareLink = `https://m365.cloud.microsoft/apps/?appId=${res[1]}`;
+      }
       return [res[0], res[1], shareLink];
     } else {
       const res = await this.sideLoadingV1(token, packagePath);
