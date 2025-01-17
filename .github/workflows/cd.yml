@@ -96,7 +96,7 @@ jobs:
       - name: release alpha npm packages to npmjs.org
         if: ${{ true }}
         run: |
-          npx lerna version prerelease --preid=alpha.$(git rev-parse --short HEAD) --exact --no-push --allow-branch dev --yes
+          npx lerna version prerelease --preid=alpha.$(git rev-parse --short HEAD) --exact --no-push --yes
 
       - name: release preview packages to npmjs.org
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.preid == 'preview' }}
