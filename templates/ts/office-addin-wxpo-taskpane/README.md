@@ -2,6 +2,9 @@
 Office add-ins are integrations built by third parties into Office by using our web-based platform. This add-in template supports: Word, Excel, PowerPoint, Outlook.
 Now you have the ability to create a single unit of distribution for all your Microsoft 365 extensions by using the same manifest format and schema, based on the current JSON-formatted Teams manifest.
 
+> Note:
+> The unified app manifest for Word, Excel, and PowerPoint is in preview. Visit [this link](https://aka.ms/officeversions) to check the required Office Versions. Also, publishing a unified add-in for Word, Excel, PowerPoint is not supported currently.
+
 ## Prerequisites
 
 - [NodeJS](https://nodejs.org/en/): version 18 or 20
