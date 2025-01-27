@@ -2,7 +2,6 @@
 // Licensed under the MIT license.
 import * as vscode from "vscode";
 
-import { TreeCategory } from "@microsoft/teamsfx-api";
 import { featureFlagManager, FeatureFlags, manifestUtils } from "@microsoft/teamsfx-core";
 
 import { isDeclarativeCopilotApp, isSPFxProject, workspaceUri } from "../globalVariables";
@@ -202,8 +201,7 @@ class TreeViewManager {
         localize("teamstoolkit.commandsTreeViewProvider.samplesDescription"),
         "fx-extension.openSamples",
         undefined,
-        { name: "library", custom: false },
-        TreeCategory.GettingStarted
+        { name: "library", custom: false }
       ),
       ...(isSPFxProject
         ? [
@@ -232,8 +230,7 @@ class TreeViewManager {
         localize("teamstoolkit.commandsTreeViewProvider.guideDescription"),
         "fx-extension.selectTutorials",
         undefined,
-        { name: "notebook", custom: false },
-        TreeCategory.GettingStarted
+        { name: "notebook", custom: false }
       ),
       new TreeViewCommand(
         localize("teamstoolkit.commandsTreeViewProvider.previewTitle"),
@@ -347,24 +344,21 @@ class TreeViewManager {
         localize("teamstoolkit.commandsTreeViewProvider.documentationDescription"),
         "fx-extension.openDocument",
         undefined,
-        { name: "book", custom: false },
-        TreeCategory.GettingStarted
+        { name: "book", custom: false }
       ),
       new TreeViewCommand(
         localize("teamstoolkit.commandsTreeViewProvider.getStartedTitle"),
         localize("teamstoolkit.commandsTreeViewProvider.getStarted"),
         "fx-extension.openWelcome",
         undefined,
-        { name: "symbol-event", custom: false },
-        TreeCategory.GettingStarted
+        { name: "symbol-event", custom: false }
       ),
       new TreeViewCommand(
         localize("teamstoolkit.commandsTreeViewProvider.reportIssuesTitle"),
         localize("teamstoolkit.commandsTreeViewProvider.reportIssuesDescription"),
         "fx-extension.openReportIssues",
         undefined,
-        { name: "github", custom: false },
-        TreeCategory.Feedback
+        { name: "github", custom: false }
       ),
     ];
     const helpProvider = new CommandsTreeViewProvider(helpCommand);

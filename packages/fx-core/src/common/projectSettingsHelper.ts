@@ -3,9 +3,9 @@
 import { ConfigFolderName } from "@microsoft/teamsfx-api";
 import fs from "fs-extra";
 import * as path from "path";
-import { MetadataV3 } from "./versionMetadata";
-import { pathUtils } from "../component/utils/pathUtils";
 import { parse } from "yaml";
+import { pathUtils } from "../component/utils/pathUtils";
+import { MetadataV3 } from "./versionMetadata";
 
 export enum OfficeManifestType {
   XmlAddIn,

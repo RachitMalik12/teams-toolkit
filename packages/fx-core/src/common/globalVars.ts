@@ -3,6 +3,7 @@
 
 import { HookContext, Middleware, NextFunction } from "@feathersjs/hooks";
 import { Context, Tools } from "@microsoft/teamsfx-api";
+import { M365AppMetadata } from "./appType/appMetadata";
 
 export let TOOLS: Tools;
 export let Locale: string | undefined;
@@ -14,6 +15,9 @@ export function setLocale(locale?: string): void {
 }
 
 class GlobalVars {
+  projectMetadata: M365AppMetadata = {
+    appType: "Invalid",
+  };
   isVS?: boolean = false;
   teamsAppId = "";
   m365TenantId = "";

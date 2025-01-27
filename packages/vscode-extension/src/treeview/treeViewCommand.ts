@@ -3,8 +3,6 @@
 
 import * as vscode from "vscode";
 
-import { TreeCategory } from "@microsoft/teamsfx-api";
-
 import { TelemetryTriggerFrom } from "../telemetry/extTelemetryEvents";
 import { localize } from "../utils/localizeUtils";
 
@@ -24,8 +22,7 @@ export class TreeViewCommand extends vscode.TreeItem {
     private readyTooltip: string | vscode.MarkdownString,
     public commandId?: string,
     public runningLabelKey?: string,
-    public image?: { name: string; custom: boolean },
-    public category?: TreeCategory
+    public image?: { name: string; custom: boolean }
   ) {
     super(readyLabel, vscode.TreeItemCollapsibleState.None);
 
