@@ -206,6 +206,7 @@ import { onSwitchAzureTenant, onSwitchM365Tenant } from "./handlers/accounts/swi
 import { kiotaRegenerate } from "./handlers/kiotaRegenerateHandler";
 import { releaseControlledFeatureSettings } from "./releaseBasedFeatureSettings";
 import { createPluginWithApiSpec } from "./handlers/createPluginWithApiSpec";
+import { createCustomEngineAgentWithApiSpec } from "./handlers/createCustomEngineAgentWithApiSpecHandler";
 
 export async function activate(context: vscode.ExtensionContext) {
   const value = IsChatParticipantEnabled && semver.gte(vscode.version, "1.90.0");
@@ -481,10 +482,10 @@ function registerActivateCommands(context: vscode.ExtensionContext) {
 
   const testCmd = vscode.commands.registerCommand("fx-extension.test", async (...args) => {
     void vscode.window.showInformationMessage("Test command is called");
-    await vscode.commands.executeCommand("fx-extension.createProjectWithApiSpec", [
-      "C:\\work\\test\\test-projects\\test-apis\\repairs-api.json",
-      "ss",
-    ]);
+    await vscode.commands.executeCommand(
+      "fx-extension.createCEAProjectWithApiSpec",
+      "C:\\work\\test\\test-projects\\test-apis\\repairs-api.json"
+    );
   });
   context.subscriptions.push(testCmd);
 }
@@ -568,6 +569,12 @@ function registerInternalCommands(context: vscode.ExtensionContext) {
     (...args) => Correlator.run(createPluginWithApiSpec, args)
   );
   context.subscriptions.push(createPluginWithApiSpecCommand);
+
+  const createCustomEngineAgentWithApiSpecCommand = vscode.commands.registerCommand(
+    "fx-extension.createCEAProjectWithApiSpec",
+    (...args) => Correlator.run(createCustomEngineAgentWithApiSpec, args)
+  );
+  context.subscriptions.push(createCustomEngineAgentWithApiSpecCommand);
 
   // Register createPluginWithManifest command
   if (featureFlagManager.getBooleanValue(FeatureFlags.KiotaIntegration)) {
