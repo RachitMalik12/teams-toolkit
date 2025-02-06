@@ -51,9 +51,9 @@ export async function createPluginWithApiSpec(args?: any[]): Promise<Result<any,
   const inputs = getSystemInputs();
   inputs[QuestionNames.ApiSpecLocation] = specPath;
   inputs[QuestionNames.ApiPluginType] = ApiPluginStartOptions.apiSpec().id;
-  inputs.capabilities = CapabilityOptions.declarativeAgent().id;
+  inputs.capabilities = CapabilityOptions.declarativeCopilot().id;
   inputs[QuestionNames.WithPlugin] = "yes";
-  inputs[QuestionNames.ProjectType] = ProjectTypeOptions.Agent().id;
+  inputs[QuestionNames.ProjectType] = ProjectTypeOptions.copilotExtension().id;
 
   const result = await runCommand(Stage.create, inputs);
 
