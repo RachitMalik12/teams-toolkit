@@ -114,9 +114,10 @@ export class PluginManifestUtils {
 
   public async getApiSpecFilePathFromTeamsManifest(
     manifest: TeamsAppManifest,
-    manifestPath: string
+    manifestPath: string,
+    index = 0
   ): Promise<Result<string[], FxError>> {
-    const pluginFilePathRes = await manifestUtils.getPluginFilePath(manifest, manifestPath);
+    const pluginFilePathRes = await manifestUtils.getPluginFilePath(manifest, manifestPath, index);
     if (pluginFilePathRes.isErr()) {
       return err(pluginFilePathRes.error);
     }

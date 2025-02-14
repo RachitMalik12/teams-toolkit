@@ -1758,7 +1758,8 @@ export class FxCore {
           destinationApiSpecFilePath: outputApiSpecPath,
           responseTemplateFolder: adaptiveCardFolder,
           pluginManifestFilePath: pluginPath,
-        }
+        },
+        operations
       );
 
       if (generateResult.isErr()) {

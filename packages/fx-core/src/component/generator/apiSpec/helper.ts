@@ -445,9 +445,12 @@ export async function generateFromApiSpec(
   context: Context,
   sourceComponent: string,
   projectType: ProjectType,
-  outputFilePath: SpecParserOutputFilePath
+  outputFilePath: SpecParserOutputFilePath,
+  targetOperations: string[] = []
 ): Promise<Result<SpecParserGenerateResult, FxError>> {
-  const operations = inputs[QuestionNames.ApiOperation] as string[];
+  const operations = (
+    targetOperations.length == 0 ? inputs[QuestionNames.ApiOperation] : targetOperations
+  ) as string[];
   const validationRes = await specParser.validate();
   const warnings = validationRes.warnings;
   const operationIdWarning = warnings.find((w) => w.type === WarningType.OperationIdMissing);

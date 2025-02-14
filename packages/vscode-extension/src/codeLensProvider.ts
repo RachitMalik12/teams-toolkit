@@ -14,6 +14,7 @@ import {
   environmentNameManager,
   getAllowedAppMaps,
   getPermissionMap,
+  manifestUtils,
 } from "@microsoft/teamsfx-core";
 import fs from "fs-extra";
 import * as parser from "jsonc-parser";
@@ -587,8 +588,8 @@ export class ApiPluginCodeLensProvider implements vscode.CodeLensProvider {
       }
       const manifestContent = fs.readFileSync(manifestFilePath, "utf-8");
       const manifest = JSON.parse(manifestContent);
-      const manifestProperties = ManifestUtil.parseCommonProperties(manifest);
-      if (!manifestProperties.capabilities.includes("plugin")) {
+      const pluginFile = manifestUtils.getPluginFilePathSync(manifest, manifestFilePath);
+      if (!pluginFile) {
         return [];
       }
 

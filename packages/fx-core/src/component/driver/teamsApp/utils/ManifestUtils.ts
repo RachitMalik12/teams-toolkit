@@ -53,6 +53,7 @@ import {
 import { AppStudioError } from "../errors";
 import { AppStudioResultFactory } from "../results";
 import { getResolvedManifest } from "./utils";
+import { PassThrough } from "stream";
 
 export class ManifestUtils {
   async readAppManifest(projectPath: string): Promise<Result<TeamsAppManifest, FxError>> {
@@ -327,11 +328,23 @@ export class ManifestUtils {
 
   public async getPluginFilePath(
     manifest: TeamsAppManifest,
-    manifestPath: string
+    manifestPath: string,
+    index = 0
   ): Promise<Result<string, FxError>> {
-    const pluginFile = manifest.copilotExtensions
-      ? manifest.copilotExtensions.plugins?.[0]?.file
-      : manifest.copilotAgents?.plugins?.[0]?.file;
+    let pluginFile = undefined;
+    if (manifest.copilotAgents?.declarativeAgents?.[index]?.file) {
+      const declarativeAgentFile = manifest.copilotAgents.declarativeAgents[index].file;
+      const doesFileExist = await fs.pathExists(
+        path.resolve(path.dirname(manifestPath), declarativeAgentFile)
+      );
+      if (!doesFileExist) {
+        return err(new FileNotFoundError("ManifestUtils", declarativeAgentFile));
+      }
+      const declarativeAgentContent = await fs.readJSON(
+        path.resolve(path.dirname(manifestPath), declarativeAgentFile)
+      );
+      pluginFile = declarativeAgentContent.actions?.[index]?.file;
+    }
     if (pluginFile) {
       const plugin = path.resolve(path.dirname(manifestPath), pluginFile);
       const doesFileExist = await fs.pathExists(plugin);
@@ -347,6 +360,42 @@ export class ManifestUtils {
           AppStudioError.TeamsAppRequiredPropertyMissingError.message("plugins", manifestPath)
         )
       );
+    }
+  }
+
+  public getPluginFilePathSync(
+    manifest: TeamsAppManifest,
+    manifestPath: string,
+    index = 0
+  ): string | undefined {
+    let pluginFile = undefined;
+    if (manifest.copilotExtensions) {
+      pluginFile = manifest.copilotExtensions.plugins?.[index]?.file;
+    } else if (manifest.copilotAgents?.plugins) {
+      pluginFile = manifest.copilotAgents.plugins?.[index]?.file;
+    } else if (manifest.copilotAgents?.declarativeAgents?.[index]?.file) {
+      const declarativeAgentFile = manifest.copilotAgents.declarativeAgents[index].file;
+      const doesFileExist = fs.pathExistsSync(
+        path.resolve(path.dirname(manifestPath), declarativeAgentFile)
+      );
+      if (!doesFileExist) {
+        return undefined;
+      }
+      const declarativeAgentContent = fs.readJsonSync(
+        path.resolve(path.dirname(manifestPath), declarativeAgentFile)
+      );
+      pluginFile = declarativeAgentContent.actions?.[0]?.file;
+    }
+    if (pluginFile) {
+      const plugin = path.resolve(path.dirname(manifestPath), pluginFile);
+      const doesFileExist = fs.pathExistsSync(plugin);
+      if (doesFileExist) {
+        return plugin;
+      } else {
+        return undefined;
+      }
+    } else {
+      return undefined;
     }
   }
 
