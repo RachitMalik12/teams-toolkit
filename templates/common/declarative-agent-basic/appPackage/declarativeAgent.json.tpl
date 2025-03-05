@@ -5,6 +5,7 @@
     {{/EmbeddedKnowledgeEnabled}}
     {{#EmbeddedKnowledgeEnabled}}
     "version": "v1.3",
+    "sensitivity_label": "General",
     {{/EmbeddedKnowledgeEnabled}}
     "name": "{{appName}}",
     "description": "Declarative agent created with Teams Toolkit",

@@ -5,6 +5,7 @@
     {{/EmbeddedKnowledgeEnabled}}
     {{#EmbeddedKnowledgeEnabled}}
     "version": "v1.3",
+    "sensitivity_label": "General",
     {{/EmbeddedKnowledgeEnabled}}
     "name": "{{appName}}${{APP_NAME_SUFFIX}}",
     "description": "This declarative agent helps you with finding car repair records.",
