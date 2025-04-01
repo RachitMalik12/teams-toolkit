@@ -57,7 +57,12 @@ export {
   parseFromResourceId,
 } from "./common/stringUtils";
 export { telemetryUtils } from "./common/telemetry";
-export { getSPFxTenant, getSideloadingStatus, listDevTunnels } from "./common/tools";
+export {
+  getSPFxTenant,
+  getSideloadingStatus,
+  listDevTunnels,
+  isSandboxedEnabled,
+} from "./common/tools";
 export { MetadataV3, VersionState } from "./common/versionMetadata";
 export { SummaryConstant } from "./component/configManager/constant";
 export { KiotaLastCommands } from "./component/constants";
@@ -110,3 +115,4 @@ export * from "./question/options";
 export { isTdpTemplate } from "./question/scaffold/vsc/createFromTdpNode";
 export { getProjectTypeByCapability } from "./question/scaffold/vsc/createRootNode";
 export { copilotGptManifestUtils } from "./component/driver/teamsApp/utils/CopilotGptManifestUtils";
+export { listSensitivityLabelScope } from "./client/graphAPIClient";

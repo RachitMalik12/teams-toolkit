@@ -34,6 +34,7 @@ import {
   UserCancelError,
   assembleError,
   getSideloadingStatus,
+  isSandboxedEnabled,
 } from "@microsoft/teamsfx-core";
 import * as os from "os";
 import * as util from "util";
