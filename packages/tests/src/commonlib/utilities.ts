@@ -184,7 +184,7 @@ export async function getWebappSettings(
     rg: string,
     name: string
   ) =>
-    `https://management.azure.com/subscriptions/${subscriptionId}/resourceGroups/${rg}/providers/Microsoft.Web/sites/${name}/config/web?api-version=2024-04-01`;
+    `https://management.azure.com/subscriptions/${subscriptionId}/resourceGroups/${rg}/providers/Microsoft.Web/sites/${name}/config/appsettings/list?api-version=2024-04-01`;
 
   try {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
