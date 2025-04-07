@@ -126,9 +126,6 @@ export class BotValidator {
     const token = (await tokenCredential?.getToken(AzureScopes))?.token;
 
     console.log("Validating env variables");
-    console.log("subscriptionId", this.subscriptionId);
-    console.log("rg", this.rg);
-    console.log("botAppSiteName", this.botAppSiteName);
     const response = await getWebappSettings(
       this.subscriptionId,
       this.rg,
