@@ -126,12 +126,16 @@ export class BotValidator {
     const token = (await tokenCredential?.getToken(AzureScopes))?.token;
 
     console.log("Validating env variables");
+    console.log("subscriptionId", this.subscriptionId);
+    console.log("rg", this.rg);
+    console.log("botAppSiteName", this.botAppSiteName);
     const response = await getWebappSettings(
       this.subscriptionId,
       this.rg,
       this.botAppSiteName,
       token as string
     );
+    console.log("response", response);
     chai.assert.exists(response);
     chai.assert.equal(
       response[BaseConfig.BOT_ID],
