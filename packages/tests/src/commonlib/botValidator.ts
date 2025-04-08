@@ -135,7 +135,8 @@ export class BotValidator {
     console.log("response", response);
     chai.assert.exists(response);
     chai.assert.equal(
-      response[BaseConfig.BOT_ID],
+      response[BaseConfig.BOT_ID] ||
+        response["Connections__BotServiceConnection__Settings__ClientId"],
       this.ctx[EnvConstants.BOT_ID] as string
     );
     if (includeAAD) {
