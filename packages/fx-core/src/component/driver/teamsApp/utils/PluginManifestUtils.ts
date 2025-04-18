@@ -11,7 +11,7 @@ import {
   Platform,
   PluginManifestSchema,
   Result,
-  TeamsAppManifest,
+  TeamsManifest,
   err,
   ok,
 } from "@microsoft/teamsfx-api";
@@ -113,7 +113,7 @@ export class PluginManifestUtils {
   }
 
   public async getApiSpecFilePathFromTeamsManifest(
-    manifest: TeamsAppManifest,
+    manifest: TeamsManifest,
     manifestPath: string
   ): Promise<Result<string[], FxError>> {
     const pluginFilePathRes = await manifestUtils.getPluginFilePath(manifest, manifestPath);

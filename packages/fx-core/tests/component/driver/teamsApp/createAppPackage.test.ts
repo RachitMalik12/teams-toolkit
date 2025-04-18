@@ -88,7 +88,7 @@ describe("teamsApp/createAppPackage", async () => {
       color: "resources/color.png",
       outline: "resources/outline.png",
     };
-    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
     sinon.stub(fs, "chmod").callsFake(async () => {});
     sinon.stub(fs, "existsSync").returns(true);
     sinon.stub(fs, "pathExists").resolves(true);
@@ -117,7 +117,7 @@ describe("teamsApp/createAppPackage", async () => {
       outputZipPath: "fakePath",
       outputJsonPath: "fakePath",
     };
-    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(new TeamsAppManifest()));
+    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(new TeamsAppManifest() as any));
     sinon.stub(fs, "pathExists").onFirstCall().resolves(false);
     const result = (await teamsAppDriver.execute(args, mockedDriverContext)).result;
     chai.assert(result.isErr());
@@ -131,7 +131,7 @@ describe("teamsApp/createAppPackage", async () => {
       outputZipPath: "fakePath",
       outputJsonPath: "fakePath",
     };
-    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(new TeamsAppManifest()));
+    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(new TeamsAppManifest() as any));
     sinon.stub(fs, "pathExists").onFirstCall().resolves(true).onSecondCall().resolves(false);
     const result = (await teamsAppDriver.execute(args, mockedDriverContext)).result;
     chai.assert(result.isErr());
@@ -150,7 +150,7 @@ describe("teamsApp/createAppPackage", async () => {
       additionalLanguages: [{ file: "aaa", languageTag: "zh" }],
       defaultLanguageTag: "en",
     };
-    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
     sinon
       .stub(fs, "pathExists")
       .onFirstCall()
@@ -195,7 +195,7 @@ describe("teamsApp/createAppPackage", async () => {
       color: "resources/color.png",
       outline: "resources/outline.png",
     };
-    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
 
     sinon.stub(fs, "pathExists").callsFake((filePath) => {
       if (filePath.includes("openai.yml")) {
@@ -247,7 +247,7 @@ describe("teamsApp/createAppPackage", async () => {
       color: "resources/color.png",
       outline: "resources/outline.png",
     };
-    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
 
     const result = (await teamsAppDriver.execute(args, mockedDriverContext)).result;
     chai.assert(result.isErr());
@@ -279,7 +279,7 @@ describe("teamsApp/createAppPackage", async () => {
       defaultLanguageTag: "en",
       defaultLanguageFile: "fake.json",
     };
-    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
 
     const result = (await teamsAppDriver.execute(args, mockedDriverContext)).result;
     chai.assert(result.isErr());
@@ -319,7 +319,7 @@ describe("teamsApp/createAppPackage", async () => {
         color: "resources/color.png",
         outline: "resources/outline.png",
       };
-      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
 
       const result = (await teamsAppDriver.execute(args, mockedDriverContext)).result;
       chai.assert(result.isErr());
@@ -354,7 +354,7 @@ describe("teamsApp/createAppPackage", async () => {
           },
         ],
       };
-      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
       sinon.stub(fs, "chmod").callsFake(async () => {});
       sinon.stub(fs, "writeFile").callsFake(async () => {});
 
@@ -409,7 +409,7 @@ describe("teamsApp/createAppPackage", async () => {
         ],
       };
 
-      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
       sinon.stub(fs, "chmod").callsFake(async () => {});
       sinon.stub(fs, "writeFile").callsFake(async () => {});
 
@@ -453,7 +453,7 @@ describe("teamsApp/createAppPackage", async () => {
         color: "resources/color.png",
         outline: "resources/outline.png",
       };
-      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
 
       const result = (await teamsAppDriver.execute(args, mockedDriverContext)).result;
       chai.assert(result.isErr());
@@ -487,7 +487,7 @@ describe("teamsApp/createAppPackage", async () => {
         color: "resources/color.png",
         outline: "resources/outline.png",
       };
-      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
 
       const result = (await teamsAppDriver.execute(args, mockedDriverContext)).result;
       chai.assert.isTrue(result.isErr());
@@ -548,7 +548,7 @@ describe("teamsApp/createAppPackage", async () => {
         },
       ],
     };
-    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
 
     sinon.stub(fs, "chmod").callsFake(async () => {});
     const writeFileStub = sinon.stub(fs, "writeFile").callsFake(async () => {});
@@ -620,7 +620,7 @@ describe("teamsApp/createAppPackage", async () => {
       ],
       defaultLanguageFile: "resources/de.json",
     };
-    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
 
     sinon.stub(fs, "chmod").callsFake(async () => {});
     const writeFileStub = sinon.stub(fs, "writeFile").callsFake(async () => {});
@@ -691,7 +691,7 @@ describe("teamsApp/createAppPackage", async () => {
         },
       ],
     };
-    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
 
     sinon.stub(fs, "chmod").callsFake(async () => {});
     sinon.stub(fs, "writeFile").callsFake(async () => {});
@@ -746,7 +746,7 @@ describe("teamsApp/createAppPackage", async () => {
         },
       ],
     };
-    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
 
     sinon.stub(fs, "chmod").callsFake(async () => {});
     sinon.stub(fs, "writeFile").callsFake(async () => {});
@@ -796,7 +796,7 @@ describe("teamsApp/createAppPackage", async () => {
         },
       ],
     };
-    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
 
     sinon.stub(fs, "chmod").callsFake(async () => {});
     sinon.stub(fs, "writeFile").callsFake(async () => {});
@@ -848,7 +848,7 @@ describe("teamsApp/createAppPackage", async () => {
         },
       ],
     };
-    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
 
     sinon.stub(fs, "chmod").callsFake(async () => {});
     sinon.stub(fs, "writeFile").callsFake(async () => {});
@@ -886,7 +886,7 @@ describe("teamsApp/createAppPackage", async () => {
       color: "resources/color.png",
       outline: "resources/outline.png",
     };
-    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
     sinon.stub(fs, "chmod").callsFake(async () => {});
     const writeFileStub = sinon.stub(fs, "writeFile").callsFake(async () => {});
 
@@ -949,7 +949,7 @@ describe("teamsApp/createAppPackage", async () => {
       color: "resources/color.png",
       outline: "resources/outline.png",
     };
-    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
     sinon.stub(fs, "chmod").callsFake(async () => {});
     const writeFileStub = sinon.stub(fs, "writeFile").callsFake(async () => {});
 
@@ -1018,7 +1018,7 @@ describe("teamsApp/createAppPackage", async () => {
       color: "resources/color.png",
       outline: "resources/outline.png",
     };
-    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
     sinon.stub(fs, "chmod").callsFake(async () => {});
     const writeFileStub = sinon.stub(fs, "writeFile").callsFake(async () => {});
 
@@ -1088,7 +1088,7 @@ describe("teamsApp/createAppPackage", async () => {
       color: "resources/color.png",
       outline: "resources/outline.png",
     };
-    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
     sinon.stub(fs, "chmod").callsFake(async () => {});
     const writeFileStub = sinon.stub(fs, "writeFile").callsFake(async () => {});
 
@@ -1163,7 +1163,7 @@ describe("teamsApp/createAppPackage", async () => {
       outline: "resources/outline.png",
     };
 
-    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
     sinon.stub(fs, "chmod").callsFake(async () => {});
     sinon.stub(fs, "writeFile").callsFake(async () => {});
 
@@ -1214,7 +1214,7 @@ describe("teamsApp/createAppPackage", async () => {
       color: "resources/color.png",
       outline: "resources/outline.png",
     };
-    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
     sinon.stub(fs, "chmod").callsFake(async () => {});
     const writeFileStub = sinon.stub(fs, "writeFile").callsFake(async () => {});
 
@@ -1280,7 +1280,7 @@ describe("teamsApp/createAppPackage", async () => {
       color: "../color.png",
       outline: "resources/outline.png",
     };
-    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
     sinon.stub(fs, "pathExists").callsFake(() => {
       return true;
     });
@@ -1306,7 +1306,7 @@ describe("teamsApp/createAppPackage", async () => {
       color: "resources/color.png",
       outline: "../outline.png",
     };
-    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
     sinon.stub(fs, "pathExists").callsFake((filePath) => {
       return true;
     });
@@ -1347,7 +1347,7 @@ describe("teamsApp/createAppPackage", async () => {
       outline: "resources/outline.png",
     };
 
-    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
     sinon.stub(fs, "pathExists").callsFake((filePath) => {
       return true;
     });
@@ -1388,7 +1388,7 @@ describe("teamsApp/createAppPackage", async () => {
       outline: "resources/outline.png",
     };
 
-    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+    sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
     sinon.stub(fs, "pathExists").callsFake((filePath) => {
       return true;
     });
@@ -1428,7 +1428,7 @@ describe("teamsApp/createAppPackage", async () => {
         color: "resources/color.png",
         outline: "resources/outline.png",
       };
-      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
       sinon.stub(fs, "chmod").callsFake(async () => {});
       const writeFileStub = sinon.stub(fs, "writeFile").callsFake(async () => {});
 
@@ -1494,7 +1494,7 @@ describe("teamsApp/createAppPackage", async () => {
         color: "resources/color.png",
         outline: "resources/outline.png",
       };
-      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
       sinon.stub(fs, "chmod").callsFake(async () => {});
       const writeFileStub = sinon.stub(fs, "writeFile").callsFake(async () => {});
 
@@ -1561,7 +1561,7 @@ describe("teamsApp/createAppPackage", async () => {
         color: "resources/color.png",
         outline: "resources/outline.png",
       };
-      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
       sinon.stub(fs, "chmod").callsFake(async () => {});
       sinon.stub(fs, "writeFile").callsFake(async () => {});
       sinon.stub(fs, "pathExists").callsFake(async (path: string) => {
@@ -1605,7 +1605,7 @@ describe("teamsApp/createAppPackage", async () => {
         color: "resources/color.png",
         outline: "resources/outline.png",
       };
-      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
       sinon.stub(fs, "chmod").callsFake(async () => {});
       sinon.stub(fs, "writeFile").callsFake(async () => {});
       sinon.stub(fs, "readFile").callsFake(async (file: fs.PathLike | number) => {
@@ -1650,7 +1650,7 @@ describe("teamsApp/createAppPackage", async () => {
           },
         ],
       };
-      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
       sinon.stub(fs, "chmod").callsFake(async () => {});
       sinon.stub(fs, "writeFile").callsFake(async () => {});
 
@@ -1687,7 +1687,7 @@ describe("teamsApp/createAppPackage", async () => {
         color: "resources/color.png",
         outline: "resources/outline.png",
       };
-      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
       sinon.stub(fs, "chmod").callsFake(async () => {});
       sinon.stub(fs, "writeFile").callsFake(async () => {});
       delete process.env[openapiServerPlaceholder];
@@ -1728,7 +1728,7 @@ describe("teamsApp/createAppPackage", async () => {
         color: "resources/color.png",
         outline: "resources/outline.png",
       };
-      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
       sinon.stub(fs, "pathExists").resolves(true);
       sinon.stub(fs, "chmod").callsFake(async () => {});
       const writeFileStub = sinon.stub(fs, "writeFile").callsFake(async () => {});
@@ -1763,7 +1763,7 @@ describe("teamsApp/createAppPackage", async () => {
         color: "resources/color.png",
         outline: "resources/outline.png",
       };
-      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
       sinon.stub(fs, "pathExists").resolves(true);
       sinon.stub(fs, "chmod").callsFake(async () => {});
       sinon.stub(fs, "writeFile").callsFake(async () => {});
@@ -1801,7 +1801,7 @@ describe("teamsApp/createAppPackage", async () => {
         color: "resources/color.png",
         outline: "resources/outline.png",
       };
-      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
       sinon.stub(fs, "pathExists").resolves(true);
       sinon.stub(fs, "chmod").callsFake(async () => {});
       sinon.stub(fs, "writeFile").callsFake(async () => {});
@@ -1843,7 +1843,7 @@ describe("teamsApp/createAppPackage", async () => {
         color: "resources/color.png",
         outline: "resources/outline.png",
       };
-      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
       sinon.stub(fs, "pathExists").resolves(true);
       sinon.stub(fs, "chmod").callsFake(async () => {});
       const writeFileStub = sinon.stub(fs, "writeFile").callsFake(async () => {});
@@ -1892,7 +1892,7 @@ describe("teamsApp/createAppPackage", async () => {
         ],
         defaultLanguageFile: "de.json",
       };
-      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
 
       sinon.stub(fs, "chmod").callsFake(async () => {});
       const writeFileStub = sinon.stub(fs, "writeFile").callsFake(async () => {});
@@ -1964,7 +1964,7 @@ describe("teamsApp/createAppPackage", async () => {
         ],
       } as DeclarativeCopilotManifestSchema;
 
-      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
       sinon.stub(fs, "chmod").callsFake(async () => {});
       sinon.stub(fs, "writeFile").callsFake(async () => {});
       sinon.stub(copilotGptManifestUtils, "getManifest").resolves(ok(declarativeAgentManifest));
@@ -2038,7 +2038,7 @@ describe("teamsApp/createAppPackage", async () => {
         ],
       } as DeclarativeCopilotManifestSchema;
 
-      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
       sinon.stub(fs, "chmod").callsFake(async () => {});
       sinon.stub(fs, "writeFile").callsFake(async () => {});
       sinon.stub(copilotGptManifestUtils, "getManifest").resolves(ok(declarativeAgentManifest));
@@ -2108,7 +2108,7 @@ describe("teamsApp/createAppPackage", async () => {
         ],
       } as DeclarativeCopilotManifestSchema;
 
-      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
       sinon.stub(fs, "chmod").callsFake(async () => {});
       sinon.stub(fs, "writeFile").callsFake(async () => {});
       sinon.stub(copilotGptManifestUtils, "getManifest").resolves(ok(declarativeAgentManifest));
@@ -2177,7 +2177,7 @@ describe("teamsApp/createAppPackage", async () => {
         ],
       } as DeclarativeCopilotManifestSchema;
 
-      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest));
+      sinon.stub(manifestUtils, "getManifestV3").resolves(ok(manifest as any));
       sinon.stub(fs, "chmod").callsFake(async () => {});
       sinon.stub(fs, "writeFile").callsFake(async () => {});
       sinon.stub(copilotGptManifestUtils, "getManifest").resolves(ok(declarativeAgentManifest));

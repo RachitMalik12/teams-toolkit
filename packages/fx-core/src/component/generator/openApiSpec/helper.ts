@@ -42,6 +42,7 @@ import {
   Stage,
   SystemError,
   TeamsAppManifest,
+  TeamsManifest,
   UserError,
   Warning,
 } from "@microsoft/teamsfx-api";
@@ -430,7 +431,7 @@ function formatTelemetryValidationProperty(result: ErrorResult | WarningResult):
 }
 
 export async function listPluginExistingOperations(
-  manifest: TeamsAppManifest,
+  manifest: TeamsManifest,
   teamsManifestPath: string,
   destinationApiSpecFilePath: string
 ): Promise<string[]> {
@@ -744,7 +745,7 @@ export async function injectAuthAction(
  */
 export async function generateScaffoldingSummary(
   warnings: Warning[],
-  teamsManifest: TeamsAppManifest,
+  teamsManifest: TeamsManifest,
   apiSpecFilePath: string,
   pluginManifestPath: string | undefined,
   projectPath: string
@@ -797,7 +798,7 @@ export async function generateScaffoldingSummary(
 function formatApiSpecValidationWarningMessage(
   specWarnings: Warning[],
   apiSpecFileName: string,
-  teamsManifest: TeamsAppManifest
+  teamsManifest: TeamsManifest
 ): string[] {
   const resultWarnings = [];
   const operationIdWarning = specWarnings.find((w) => w.type === WarningType.OperationIdMissing);
@@ -843,10 +844,7 @@ function formatApiSpecValidationWarningMessage(
   return resultWarnings;
 }
 
-function validateTeamsManifestLength(
-  teamsManifest: TeamsAppManifest,
-  warnings: Warning[]
-): string[] {
+function validateTeamsManifestLength(teamsManifest: TeamsManifest, warnings: Warning[]): string[] {
   const nameShortLimit = 30;
   const nameFullLimit = 100;
   const descriptionShortLimit = 80;
@@ -885,7 +883,7 @@ function validateTeamsManifestLength(
         )
     );
   }
-  if (teamsManifest.description.full!.length > descriptionFullLimit) {
+  if (teamsManifest.description.full.length > descriptionFullLimit) {
     resultWarnings.push(
       formatLengthExceedingErrorMessage("/description/full", descriptionFullLimit)
     );
@@ -912,7 +910,7 @@ function validateTeamsManifestLength(
               path.join(AppPackageFolderName, ManifestTemplateFileName),
               path.join(
                 AppPackageFolderName,
-                teamsManifest.composeExtensions![0].apiSpecificationFile ?? ""
+                (teamsManifest as any).composeExtensions![0].apiSpecificationFile ?? ""
               )
             )
         );
@@ -921,7 +919,11 @@ function validateTeamsManifestLength(
 
     const commands = teamsManifest.composeExtensions![0].commands;
 
-    for (const command of commands) {
+    for (const command of commands as {
+      id: string;
+      type: string;
+      apiResponseRenderingTemplateFile?: string;
+    }[]) {
       if (command.type === "query") {
         if (!command.apiResponseRenderingTemplateFile) {
           const errorDetail = warnings.find(

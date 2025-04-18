@@ -162,7 +162,7 @@ describe("teamsApp/syncManifest", async () => {
     sinon.stub(manifestUtils, "_readAppManifest").resolves(
       ok({
         id: "1",
-      } as TeamsAppManifest)
+      } as any)
     );
     sinon.stub(envUtil, "readEnv").throws("error");
     sinon.stub(envUtil, "writeEnv").throws("error");
@@ -205,7 +205,7 @@ describe("teamsApp/syncManifest", async () => {
       ok({
         id: "1",
         version: "1.0",
-      } as TeamsAppManifest)
+      } as any)
     );
     sinon.stub(envUtil, "readEnv").throws("error");
     sinon.stub(envUtil, "writeEnv").throws("error");
@@ -274,7 +274,7 @@ describe("teamsApp/syncManifest", async () => {
     sinon.stub(manifestUtils, "_readAppManifest").resolves(
       ok({
         id: "id-${{TEAMS_APP_ID}}",
-      } as TeamsAppManifest)
+      } as any)
     );
     const result = await syncManifestDriver.sync(args, mockedDriverContext);
     chai.assert.isTrue(result.isOk());
@@ -318,7 +318,7 @@ describe("teamsApp/syncManifest", async () => {
       ok({
         id: "${{TEAMS_APP_ID}}",
         version: "${{TEAMS_APP_ID}}",
-      } as TeamsAppManifest)
+      } as any)
     );
     const result = await syncManifestDriver.sync(args, mockedDriverContext);
     chai.assert.isTrue(result.isOk());
@@ -362,7 +362,7 @@ describe("teamsApp/syncManifest", async () => {
       ok({
         id: "111",
         version: "222",
-      } as TeamsAppManifest)
+      } as any)
     );
     const result = await syncManifestDriver.sync(args, mockedDriverContext);
     chai.assert.isTrue(result.isOk());
@@ -404,7 +404,7 @@ describe("teamsApp/syncManifest", async () => {
     sinon.stub(manifestUtils, "_readAppManifest").resolves(
       ok({
         id: "app-${{TEAMS_APP_ID}}",
-      } as TeamsAppManifest)
+      } as any)
     );
     const result = await syncManifestDriver.sync(args, mockedDriverContext);
     chai.assert.isTrue(result.isOk());
@@ -446,7 +446,7 @@ describe("teamsApp/syncManifest", async () => {
     sinon.stub(manifestUtils, "_readAppManifest").resolves(
       ok({
         id: "app-${{TEAMS_APP_ID}}-${{TEAMS_APP_ID}}",
-      } as TeamsAppManifest)
+      } as any)
     );
     const result = await syncManifestDriver.sync(args, mockedDriverContext);
     chai.assert.isTrue(result.isOk());
@@ -488,7 +488,7 @@ describe("teamsApp/syncManifest", async () => {
     sinon.stub(manifestUtils, "_readAppManifest").resolves(
       ok({
         id: "1",
-      } as TeamsAppManifest)
+      } as any)
     );
     const result = await syncManifestDriver.sync(args, mockedDriverContext);
     chai.assert.isTrue(result.isOk());
@@ -534,7 +534,7 @@ describe("teamsApp/syncManifest", async () => {
     sinon.stub(manifestUtils, "_readAppManifest").resolves(
       ok({
         id: "${{TEAMS_APP_ID}}",
-      } as TeamsAppManifest)
+      } as any)
     );
     const result = await syncManifestDriver.sync(args, mockedDriverContext);
     chai.assert.isTrue(result.isOk());
@@ -582,7 +582,7 @@ describe("teamsApp/syncManifest", async () => {
       ok({
         id: "${{TEAMS_APP_ID}}",
         packageName: "${{TEAMS_APP_ID}}",
-      } as TeamsAppManifest)
+      } as any)
     );
     const result = await syncManifestDriver.sync(args, mockedDriverContext);
     chai.assert.isTrue(result.isOk());
@@ -624,7 +624,7 @@ describe("teamsApp/syncManifest", async () => {
     sinon.stub(manifestUtils, "_readAppManifest").resolves(
       ok({
         id: "${{TEAMS_APP_ID}}",
-      } as TeamsAppManifest)
+      } as any)
     );
     const result = await syncManifestDriver.sync(args, mockedDriverContext);
     chai.assert.isTrue(result.isErr());
@@ -689,7 +689,7 @@ describe("teamsApp/syncManifest", async () => {
     sinon.stub(manifestUtils, "_readAppManifest").resolves(
       ok({
         id: "id-${{TEAMS_APP_ID}}",
-      } as TeamsAppManifest)
+      } as any)
     );
     const result = await syncManifestDriver.sync(args, mockedDriverContext);
     chai.assert.isTrue(result.isErr());
@@ -775,7 +775,7 @@ describe("teamsApp/syncManifest", async () => {
       ok({
         id: "1",
         version: "${{VERSION}}",
-      } as TeamsAppManifest)
+      } as any)
     );
     const result = await syncManifestDriver.sync(args, mockedDriverContext);
     chai.assert.isTrue(result.isOk());
@@ -861,7 +861,7 @@ describe("teamsApp/syncManifest", async () => {
       ok({
         id: "1",
         version: "${{VERSION}}",
-      } as TeamsAppManifest)
+      } as any)
     );
     const result = await syncManifestDriver.sync(args, mockedDriverContext);
     chai.assert.isTrue(result.isOk());

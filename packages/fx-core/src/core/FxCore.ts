@@ -122,7 +122,6 @@ import { ValidateManifestDriver } from "../component/driver/teamsApp/validate";
 import { ValidateAppPackageDriver } from "../component/driver/teamsApp/validateAppPackage";
 import { ValidateWithTestCasesDriver } from "../component/driver/teamsApp/validateTestCases";
 import { createDriverContext } from "../component/driver/util/utils";
-import "../component/feature/sso";
 import { SSO } from "../component/feature/sso";
 import { addExistingPlugin } from "../component/generator/declarativeAgent/helper";
 import {
@@ -1866,8 +1865,12 @@ export class FxCore {
       const existingOperations = apiResultList
         .filter((operation) => existingOperationIds.includes(operation.operationId))
         .map((operation) => operation.api);
-      const apiSpecificationFile = manifestRes.value.composeExtensions![0].apiSpecificationFile;
-      const outputApiSpecPath = path.join(path.dirname(manifestPath), apiSpecificationFile!);
+      const apiSpecificationFile = (manifestRes.value as any).composeExtensions![0]
+        .apiSpecificationFile;
+      const outputApiSpecPath = path.join(
+        path.dirname(manifestPath),
+        apiSpecificationFile as string
+      );
 
       const operations = [...existingOperations, ...newOperations];
 
@@ -2066,7 +2069,7 @@ export class FxCore {
       return err(manifestRes.error);
     }
 
-    const teamsManifest = manifestRes.value;
+    const teamsManifest = manifestRes.value as any;
     const declarativeGpt = teamsManifest.copilotExtensions
       ? teamsManifest.copilotExtensions.declarativeCopilots?.[0]
       : teamsManifest.copilotAgents?.declarativeAgents?.[0];
@@ -2346,9 +2349,9 @@ export class FxCore {
     }
 
     const teamsManifest = manifestRes.value;
-    const agent = teamsManifest.copilotExtensions
-      ? teamsManifest.copilotExtensions.declarativeCopilots?.[0]
-      : teamsManifest.copilotAgents?.declarativeAgents?.[0];
+    const agent = (teamsManifest as any).copilotExtensions
+      ? (teamsManifest as any).copilotExtensions.declarativeCopilots?.[0]
+      : (teamsManifest as any).copilotAgents?.declarativeAgents?.[0];
     if (!agent?.file) {
       return err(
         AppStudioResultFactory.UserError(
@@ -2460,9 +2463,9 @@ export class FxCore {
     }
 
     const teamsManifest = manifestRes.value;
-    const declarativeGpt = teamsManifest.copilotExtensions
-      ? teamsManifest.copilotExtensions.declarativeCopilots?.[0]
-      : teamsManifest.copilotAgents?.declarativeAgents?.[0];
+    const declarativeGpt = (teamsManifest as any).copilotExtensions
+      ? (teamsManifest as any).copilotExtensions.declarativeCopilots?.[0]
+      : (teamsManifest as any).copilotAgents?.declarativeAgents?.[0];
     if (!declarativeGpt?.file) {
       return err(
         AppStudioResultFactory.UserError(

@@ -180,9 +180,9 @@ export class CopilotGptManifestUtils {
     if (teamsManifestRes.isErr()) {
       return err(teamsManifestRes.error);
     }
-    const filePath = teamsManifestRes.value.copilotExtensions
-      ? teamsManifestRes.value.copilotExtensions.declarativeCopilots?.[0]?.file
-      : teamsManifestRes.value.copilotAgents?.declarativeAgents?.[0]?.file;
+    const filePath = (teamsManifestRes.value as any).copilotExtensions
+      ? (teamsManifestRes.value as any).copilotExtensions.declarativeCopilots?.[0]?.file
+      : (teamsManifestRes.value as any).copilotAgents?.declarativeAgents?.[0]?.file;
     if (!filePath) {
       return err(
         AppStudioResultFactory.UserError(

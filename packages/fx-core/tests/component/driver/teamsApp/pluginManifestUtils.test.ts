@@ -64,7 +64,7 @@ describe("pluginManifestUtils", () => {
     ],
   };
 
-  const teamsManifest: TeamsAppManifest = {
+  const teamsManifest: any = {
     $schema:
       "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
     manifestVersion: "1.9",
@@ -186,7 +186,7 @@ describe("pluginManifestUtils", () => {
   });
 
   it("getApiSpecFilePathFromTeamsManifest error: invalid plugin node case 2", async () => {
-    const testManifest = {
+    const testManifest: any = {
       $schema:
         "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
       manifestVersion: "1.9",
@@ -214,7 +214,7 @@ describe("pluginManifestUtils", () => {
     };
     sandbox.stub(fs, "readFile").resolves(JSON.stringify(pluginManifest) as any);
     const res = await pluginManifestUtils.getApiSpecFilePathFromTeamsManifest(
-      testManifest as unknown as TeamsAppManifest,
+      testManifest,
       "/test/path"
     );
     chai.assert.isTrue(res.isErr());

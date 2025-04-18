@@ -17,6 +17,7 @@ import {
   PluginManifestSchema,
   SingleFileQuestion,
   SingleSelectQuestion,
+  TeamsManifestLatest,
   TextInputQuestion,
 } from "@microsoft/teamsfx-api";
 import fs from "fs-extra";
@@ -1601,7 +1602,7 @@ export function selectDeclarativeAgentManifestQuestion(): SingleFileQuestion {
         if (manifestRes.isErr()) {
           return Promise.resolve(undefined);
         }
-        const manifest = manifestRes.value;
+        const manifest = manifestRes.value as TeamsManifestLatest;
         const declarativeAgentPath = manifest?.copilotAgents?.declarativeAgents?.[0]?.file;
         if (!declarativeAgentPath) {
           return Promise.resolve(undefined);

@@ -1,7 +1,15 @@
 /**
  * @author Yuqi Zhou <yuqzho@microsoft.com>
  */
-import { err, Inputs, ok, Platform, TeamsAppManifest, UserError } from "@microsoft/teamsfx-api";
+import {
+  err,
+  Inputs,
+  ok,
+  Platform,
+  TeamsAppManifest,
+  TeamsManifest,
+  UserError,
+} from "@microsoft/teamsfx-api";
 import chai from "chai";
 import fs from "fs-extra";
 import { merge } from "lodash";
@@ -185,9 +193,7 @@ describe("developPortalScaffoldUtils", () => {
           languages: { zh: Buffer.from(JSON.stringify({})) },
         })
       );
-      sandbox
-        .stub(manifestUtils, "_readAppManifest")
-        .resolves(ok(undefined as unknown as TeamsAppManifest));
+      sandbox.stub(manifestUtils, "_readAppManifest").resolves(ok(undefined as any));
       const res = await developerPortalScaffoldUtils.updateFilesForTdp(ctx, appDefinition, inputs);
 
       chai.assert.isTrue(res.isErr());
@@ -256,7 +262,7 @@ describe("developPortalScaffoldUtils", () => {
         ],
       };
 
-      const manifestTemplate: TeamsAppManifest = {
+      const manifestTemplate: any = {
         manifestVersion: "version",
         id: "mock-app-id",
         name: { short: "short-name" },
@@ -456,7 +462,7 @@ describe("developPortalScaffoldUtils", () => {
               websiteUrl: "websiteUrlnew0",
             },
           ],
-        })
+        } as any)
       );
 
       const res = await developerPortalScaffoldUtils.updateFilesForTdp(ctx, appDefinition, inputs);
@@ -536,7 +542,7 @@ describe("developPortalScaffoldUtils", () => {
         ],
       };
 
-      const existingManifest: TeamsAppManifest = {
+      const existingManifest: any = {
         manifestVersion: "version",
         id: "mock-app-id",
         name: { short: "short-name" },
@@ -661,7 +667,7 @@ describe("developPortalScaffoldUtils", () => {
         validDomains: [],
       };
 
-      const existingManifest: TeamsAppManifest = {
+      const existingManifest: any = {
         manifestVersion: "version",
         id: "mock-app-id",
         name: { short: "short-name" },
@@ -798,7 +804,7 @@ describe("developPortalScaffoldUtils", () => {
         validDomains: [],
       };
 
-      const existingManifest: TeamsAppManifest = {
+      const existingManifest: any = {
         manifestVersion: "version",
         id: "mock-app-id",
         name: { short: "short-name" },
@@ -913,7 +919,7 @@ describe("developPortalScaffoldUtils", () => {
         },
       };
 
-      const existingManifest: TeamsAppManifest = {
+      const existingManifest: any = {
         manifestVersion: "version",
         id: "mock-app-id",
         name: { short: "short-name" },
@@ -1034,7 +1040,7 @@ describe("developPortalScaffoldUtils", () => {
         platform: Platform.VSCode,
         projectPath: "project-path",
       };
-      const manifest = {
+      const manifest: any = {
         manifestVersion: "1.17",
         id: "mock-app-id",
         name: { short: "short-name" },
@@ -1120,7 +1126,7 @@ describe("developPortalScaffoldUtils", () => {
           throw new Error("not support " + file);
         }
       });
-      sandbox.stub(manifestUtils, "_readAppManifest").resolves(ok(manifest as TeamsAppManifest));
+      sandbox.stub(manifestUtils, "_readAppManifest").resolves(ok(manifest));
 
       const res = await developerPortalScaffoldUtils.updateFilesForTdp(ctx, appDefinition, inputs);
 
@@ -1173,7 +1179,7 @@ describe("developPortalScaffoldUtils", () => {
         platform: Platform.VSCode,
         projectPath: "project-path",
       };
-      const manifest = {
+      const manifest: any = {
         manifestVersion: "1.17",
         id: "mock-app-id",
         name: { short: "short-name" },
@@ -1255,7 +1261,7 @@ describe("developPortalScaffoldUtils", () => {
           throw new Error("not support " + file);
         }
       });
-      sandbox.stub(manifestUtils, "_readAppManifest").resolves(ok(manifest as TeamsAppManifest));
+      sandbox.stub(manifestUtils, "_readAppManifest").resolves(ok(manifest));
 
       const res = await developerPortalScaffoldUtils.updateFilesForTdp(ctx, appDefinition, inputs);
 

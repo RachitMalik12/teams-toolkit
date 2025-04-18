@@ -460,7 +460,7 @@ describe("TeamsDevPortalClient Test", () => {
       sandbox.stub(axios, "create").returns(fakeAxiosInstance);
       sandbox
         .stub(manifestUtils, "extractManifestFromArchivedFile")
-        .returns(ok(new TeamsAppManifest()));
+        .returns(ok(new TeamsAppManifest() as any));
 
       const error = {
         response: {

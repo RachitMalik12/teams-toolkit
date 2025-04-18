@@ -1,13 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-import path from "path";
+import { AppManifestUtils, TeamsManifestLatest } from "@microsoft/teamsfx-api";
 import fs from "fs-extra";
+import path from "path";
+import { ProjectTypeProps } from "../../common/telemetry";
 import { MetadataV3 } from "../../common/versionMetadata";
 import { ProjectModel } from "../configManager/interface";
-import { ProjectTypeProps } from "../../common/telemetry";
 import { manifestUtils } from "../driver/teamsApp/utils/ManifestUtils";
-import { DeclarativeCopilotManifestSchema, PluginManifestSchema } from "@microsoft/teamsfx-api";
 
 class MetadataDAPropertiesUtil {
   async parseManifest(
@@ -31,16 +31,18 @@ class MetadataDAPropertiesUtil {
       if (result.isErr()) {
         return;
       }
-      const manifest = result.value;
+      const manifest = result.value as TeamsManifestLatest;
       const declarativeAgentRelativePath = manifest.copilotAgents?.declarativeAgents?.[0].file;
 
       if (declarativeAgentRelativePath) {
         const manifestFolder = path.dirname(manifestPath);
         const declarativeAgentJsonPath = path.join(manifestFolder, declarativeAgentRelativePath);
-        const declarativeAgentJson = (await fs.readJSON(
+        // const declarativeAgentJson = (await fs.readJSON(
+        //   declarativeAgentJsonPath
+        // )) as DeclarativeCopilotManifestSchema;
+        const declarativeAgentJson = await AppManifestUtils.readDeclarativeAgentManifest(
           declarativeAgentJsonPath
-        )) as DeclarativeCopilotManifestSchema;
-
+        );
         const capabilitiesCount = declarativeAgentJson.capabilities?.length ?? 0;
         props[ProjectTypeProps.DeclarativeAgentCapabilitiesCount] = capabilitiesCount.toString();
 
@@ -63,7 +65,8 @@ class MetadataDAPropertiesUtil {
           for (const pluginPath of pluginPaths ?? []) {
             const pluginJsonPath = path.join(declarativeAgentFolder, pluginPath);
             if (await fs.pathExists(pluginJsonPath)) {
-              const pluginJson = (await fs.readJSON(pluginJsonPath)) as PluginManifestSchema;
+              const pluginJson = await AppManifestUtils.readApiPluginManifest(pluginJsonPath);
+              // const pluginJson = (await fs.readJSON(pluginJsonPath)) as PluginManifestSchema;
               const runtimes = pluginJson.runtimes;
               if (runtimes) {
                 const authStr = runtimes

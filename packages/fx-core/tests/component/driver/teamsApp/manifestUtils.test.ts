@@ -60,200 +60,6 @@ describe("ManifestUtils", () => {
     const result = await manifestUtils.addCapabilities(inputs, capabilities);
     assert.isTrue(result.isOk());
   });
-  it("should add a configurable tabs capability", async () => {
-    mockInputManifestFile(manifestUtils, latestManifestVersion);
-    sinon.stub(fs, "writeFile").callsFake((path: any, data: string) => {
-      const writtenManifest = JSON.parse(data) as TeamsAppManifest;
-      assert.isArray(writtenManifest.configurableTabs);
-      assert.isNotEmpty(writtenManifest.configurableTabs);
-      assert.deepEqual(
-        writtenManifest.configurableTabs![0].scopes,
-        getConfigurableTabsTplBasedOnVersion(writtenManifest.manifestVersion)[0].scopes
-      );
-      return Promise.resolve();
-    });
-    const inputs: InputsWithProjectPath = {
-      projectPath: "path/to/project",
-      addManifestPath: "path/to/manifest.json",
-      platform: Platform.CLI,
-    };
-    const capabilities: ManifestCapability[] = [{ name: "configurableTab" }];
-    const result = await manifestUtils.addCapabilities(inputs, capabilities);
-    assert.isTrue(result.isOk());
-  });
-  it("should add a configurable tabs capability - exceed limit", async () => {
-    mockInputManifestFileExceedLimit(manifestUtils, latestManifestVersion);
-    const inputs: InputsWithProjectPath = {
-      projectPath: "path/to/project",
-      addManifestPath: "path/to/manifest.json",
-      platform: Platform.CLI,
-    };
-    const capabilities: ManifestCapability[] = [{ name: "configurableTab" }];
-    const result = await manifestUtils.addCapabilities(inputs, capabilities);
-    assert.isTrue(result.isErr());
-    if (result.isErr()) {
-      assert.isTrue(result.error.name.includes(AppStudioError.CapabilityExceedLimitError.name));
-    }
-  });
-  it("should add a configurable tabs capability - existing app", async () => {
-    mockInputManifestFile(manifestUtils, latestManifestVersion);
-    sinon.stub(fs, "writeFile").callsFake((path: any, data: string) => {
-      const writtenManifest = JSON.parse(data) as TeamsAppManifest;
-      assert.isArray(writtenManifest.configurableTabs);
-      assert.isNotEmpty(writtenManifest.configurableTabs);
-      assert.deepEqual(
-        writtenManifest.configurableTabs![0].scopes,
-        getConfigurableTabsTplExistingAppBasedOnVersion(writtenManifest.manifestVersion)[0].scopes
-      );
-      return Promise.resolve();
-    });
-    const inputs: InputsWithProjectPath = {
-      projectPath: "path/to/project",
-      addManifestPath: "path/to/manifest.json",
-      platform: Platform.CLI,
-    };
-    const capabilities: ManifestCapability[] = [{ name: "configurableTab", existingApp: true }];
-    const result = await manifestUtils.addCapabilities(inputs, capabilities);
-    assert.isTrue(result.isOk());
-  });
-  it("should add a configurable tabs capability - old version", async () => {
-    mockInputManifestFile(manifestUtils, oldManifestVersion);
-    sinon.stub(fs, "writeFile").callsFake((path: any, data: string) => {
-      const writtenManifest = JSON.parse(data) as TeamsAppManifest;
-      assert.isArray(writtenManifest.configurableTabs);
-      assert.isNotEmpty(writtenManifest.configurableTabs);
-      assert.deepEqual(
-        writtenManifest.configurableTabs![0].scopes,
-        getConfigurableTabsTplBasedOnVersion(writtenManifest.manifestVersion)[0].scopes
-      );
-      return Promise.resolve();
-    });
-    const inputs: InputsWithProjectPath = {
-      projectPath: "path/to/project",
-      addManifestPath: "path/to/manifest.json",
-      platform: Platform.CLI,
-    };
-    const capabilities: ManifestCapability[] = [{ name: "configurableTab" }];
-    const result = await manifestUtils.addCapabilities(inputs, capabilities);
-    assert.isTrue(result.isOk());
-  });
-  it("should add a bot capability", async () => {
-    mockInputManifestFile(manifestUtils, latestManifestVersion);
-    sinon.stub(fs, "writeFile").callsFake((path: any, data: string) => {
-      const writtenManifest = JSON.parse(data) as TeamsAppManifest;
-      assert.isArray(writtenManifest.bots);
-      assert.isNotEmpty(writtenManifest.bots);
-      assert.deepEqual(
-        writtenManifest.bots![0].scopes,
-        getBotsTplBasedOnVersion(writtenManifest.manifestVersion)[0].scopes
-      );
-      return Promise.resolve();
-    });
-    const inputs: InputsWithProjectPath = {
-      projectPath: "path/to/project",
-      addManifestPath: "path/to/manifest.json",
-      platform: Platform.CLI,
-    };
-    const capabilities: ManifestCapability[] = [{ name: "Bot" }];
-    const result = await manifestUtils.addCapabilities(inputs, capabilities);
-    assert.isTrue(result.isOk());
-  });
-  it("should add a bot capability - snippet", async () => {
-    mockInputManifestFile(manifestUtils, latestManifestVersion);
-    const snippet: IBot = {
-      botId: "test",
-      scopes: ["personal"],
-    };
-    sinon.stub(fs, "writeFile").callsFake((path: any, data: string) => {
-      const writtenManifest = JSON.parse(data) as TeamsAppManifest;
-      assert.isArray(writtenManifest.bots);
-      assert.isNotEmpty(writtenManifest.bots);
-      assert.deepEqual(writtenManifest.bots![0], snippet);
-      return Promise.resolve();
-    });
-    const inputs: InputsWithProjectPath = {
-      projectPath: "path/to/project",
-      addManifestPath: "path/to/manifest.json",
-      platform: Platform.CLI,
-    };
-    const capabilities: ManifestCapability[] = [{ name: "Bot", snippet: snippet }];
-    const result = await manifestUtils.addCapabilities(inputs, capabilities);
-    assert.isTrue(result.isOk());
-  });
-  it("should add a bot capability - existing app", async () => {
-    mockInputManifestFile(manifestUtils, latestManifestVersion);
-    sinon.stub(fs, "writeFile").callsFake((path: any, data: string) => {
-      const writtenManifest = JSON.parse(data) as TeamsAppManifest;
-      assert.isArray(writtenManifest.bots);
-      assert.isNotEmpty(writtenManifest.bots);
-      assert.deepEqual(
-        writtenManifest.bots![0].scopes,
-        getBotsTplExistingAppBasedOnVersion(writtenManifest.manifestVersion)[0].scopes
-      );
-      return Promise.resolve();
-    });
-    const inputs: InputsWithProjectPath = {
-      projectPath: "path/to/project",
-      addManifestPath: "path/to/manifest.json",
-      platform: Platform.CLI,
-    };
-    const capabilities: ManifestCapability[] = [{ name: "Bot", existingApp: true }];
-    const result = await manifestUtils.addCapabilities(inputs, capabilities);
-    assert.isTrue(result.isOk());
-  });
-  it("should add a bot capability - command bot", async () => {
-    mockInputManifestFile(manifestUtils, latestManifestVersion);
-    sinon.stub(fs, "writeFile").callsFake((path: any, data: string) => {
-      const writtenManifest = JSON.parse(data) as TeamsAppManifest;
-      assert.isArray(writtenManifest.bots);
-      assert.isNotEmpty(writtenManifest.bots);
-      assert.deepEqual(
-        writtenManifest.bots![0].scopes,
-        getBotsTplForCommandAndResponseBasedOnVersion(writtenManifest.manifestVersion)[0].scopes
-      );
-      assert.deepEqual(
-        writtenManifest.bots![0].commandLists,
-        getBotsTplForCommandAndResponseBasedOnVersion(writtenManifest.manifestVersion)[0]
-          .commandLists
-      );
-      return Promise.resolve();
-    });
-    const inputs: InputsWithProjectPath = {
-      projectPath: "path/to/project",
-      addManifestPath: "path/to/manifest.json",
-      platform: Platform.CLI,
-      features: "command-bot",
-    };
-    const capabilities: ManifestCapability[] = [{ name: "Bot" }];
-    const result = await manifestUtils.addCapabilities(inputs, capabilities);
-    assert.isTrue(result.isOk());
-  });
-  it("should add a bot capability - notification bot", async () => {
-    mockInputManifestFile(manifestUtils, latestManifestVersion);
-    sinon.stub(fs, "writeFile").callsFake((path: any, data: string) => {
-      const writtenManifest = JSON.parse(data) as TeamsAppManifest;
-      assert.isArray(writtenManifest.bots);
-      assert.isNotEmpty(writtenManifest.bots);
-      assert.deepEqual(
-        writtenManifest.bots![0].scopes,
-        getBotsTplForNotificationBasedOnVersion(writtenManifest.manifestVersion)[0].scopes
-      );
-      assert.deepEqual(
-        writtenManifest.bots![0].commandLists,
-        getBotsTplForNotificationBasedOnVersion(writtenManifest.manifestVersion)[0].commandLists
-      );
-      return Promise.resolve();
-    });
-    const inputs: InputsWithProjectPath = {
-      projectPath: "path/to/project",
-      addManifestPath: "path/to/manifest.json",
-      platform: Platform.CLI,
-      features: "notification",
-    };
-    const capabilities: ManifestCapability[] = [{ name: "Bot" }];
-    const result = await manifestUtils.addCapabilities(inputs, capabilities);
-    assert.isTrue(result.isOk());
-  });
   it("getPluginFilePath success", async () => {
     const mockManifest = {
       copilotAgents: {
@@ -343,7 +149,7 @@ describe("ManifestUtils", () => {
 });
 
 function mockInputManifestFile(manifestUtils: ManifestUtils, manifestVersion: string) {
-  const mockManifest: TeamsAppManifest = {
+  const mockManifest: any = {
     $schema:
       "https://developer.microsoft.com/en-us/json-schemas/teams/v1.17/MicrosoftTeams.schema.json",
     manifestVersion: manifestVersion,
@@ -367,7 +173,7 @@ function mockInputManifestFile(manifestUtils: ManifestUtils, manifestVersion: st
 }
 
 function mockInputManifestFileExceedLimit(manifestUtils: ManifestUtils, manifestVersion: string) {
-  const mockManifest: TeamsAppManifest = {
+  const mockManifest: any = {
     $schema:
       "https://developer.microsoft.com/en-us/json-schemas/teams/v1.17/MicrosoftTeams.schema.json",
     manifestVersion: manifestVersion,

@@ -1,13 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-import path from "path";
+import { TeamsManifestVDevPreview } from "@microsoft/teamsfx-api";
 import fs from "fs-extra";
+import path from "path";
+import { ProjectTypeProps, TelemetryProperty, WebApplicationIdValue } from "../../common/telemetry";
 import { MetadataV3 } from "../../common/versionMetadata";
 import { ProjectModel } from "../configManager/interface";
-import { ProjectTypeProps, TelemetryProperty, WebApplicationIdValue } from "../../common/telemetry";
 import { manifestUtils } from "../driver/teamsApp/utils/ManifestUtils";
-import { TeamsAppManifest } from "../../../../manifest/build/manifest";
 
 interface summary {
   version: string;
@@ -42,10 +42,10 @@ class MetadataRscPermissionUtil {
       if (result.isErr()) {
         return;
       }
-      const webApplicationApp = result.value.webApplicationInfo?.id;
+      const webApplicationApp = (result.value as TeamsManifestVDevPreview).webApplicationInfo?.id;
       props[TelemetryProperty.WebApplicationId] = getWebApplicationIdStatus(webApplicationApp);
 
-      const manifest = result.value;
+      const manifest = result.value as TeamsManifestVDevPreview;
       const summary = this.summary(manifest);
       if (summary) {
         props[ProjectTypeProps.TeamsManifestVersion] = summary.version;
@@ -57,7 +57,7 @@ class MetadataRscPermissionUtil {
     }
   }
 
-  summary(manifest: TeamsAppManifest): summary | undefined {
+  summary(manifest: TeamsManifestVDevPreview): summary | undefined {
     const version = manifest.version;
     const rscApplication: string[] = [];
     const rscDelegated: string[] = [];
@@ -68,7 +68,7 @@ class MetadataRscPermissionUtil {
         rscDelegated.push(permission.name);
       }
     }
-    for (const permission of manifest.webApplicationInfo?.applicationPermissions || []) {
+    for (const permission of (manifest as any).webApplicationInfo?.applicationPermissions || []) {
       rscApplication.push(permission);
     }
 

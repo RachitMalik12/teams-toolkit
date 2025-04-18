@@ -740,14 +740,14 @@ export class SPFxGenerator {
           );
           const componentId = webpartManifest["id"];
           const webpartName = webpartManifest["preconfiguredEntries"][0].title.default;
-          const remoteStaticSnippet: IStaticTab = {
+          const remoteStaticSnippet: any = {
             entityId: componentId,
             name: webpartName,
             contentUrl: util.format(ManifestTemplate.REMOTE_CONTENT_URL, componentId),
             websiteUrl: ManifestTemplate.WEBSITE_URL,
             scopes: ["personal"],
           };
-          const localStaticSnippet: IStaticTab = {
+          const localStaticSnippet: any = {
             entityId: componentId,
             name: webpartName,
             contentUrl: util.format(ManifestTemplate.LOCAL_CONTENT_URL, componentId),

@@ -11,6 +11,7 @@ import {
   PluginManifestSchema,
   DeclarativeCopilotCapabilityName,
   EmbeddedKnowledgeCapability,
+  TeamsManifestLatest,
 } from "@microsoft/teamsfx-api";
 import AdmZip from "adm-zip";
 import fs from "fs-extra";
@@ -87,7 +88,7 @@ export class CreateAppPackageDriver implements StepDriver {
     if (manifestRes.isErr()) {
       return err(manifestRes.error);
     }
-    const manifest = manifestRes.value;
+    const manifest = manifestRes.value as TeamsManifestLatest;
     // Deal with relative path
     // Environment variables should have been replaced by value
     // ./build/appPackage/appPackage.dev.zip instead of ./build/appPackage/appPackage.${{TEAMSFX_ENV}}.zip
@@ -252,8 +253,8 @@ export class CreateAppPackageDriver implements StepDriver {
         return err(addFileWithVariableRes.error);
       }
 
-      if (manifest.composeExtensions[0].commands.length > 0) {
-        for (const command of manifest.composeExtensions[0].commands) {
+      if (manifest.composeExtensions[0].commands!.length > 0) {
+        for (const command of manifest.composeExtensions[0].commands!) {
           if (command.apiResponseRenderingTemplateFile) {
             const adaptiveCardFile = path.resolve(
               appDirectory,
@@ -273,9 +274,9 @@ export class CreateAppPackageDriver implements StepDriver {
       }
     }
 
-    const plugins = manifest.copilotExtensions
-      ? manifest.copilotExtensions.plugins
-      : manifest.copilotAgents?.plugins;
+    const plugins = (manifest as any).copilotExtensions
+      ? (manifest as any).copilotExtensions.plugins
+      : (manifest as any).copilotAgents?.plugins;
     if (plugins?.length && plugins[0].file) {
       // API plugin
       const addFilesRes = await this.addPlugin(
@@ -290,8 +291,8 @@ export class CreateAppPackageDriver implements StepDriver {
       }
     }
 
-    const declarativeCopilots = manifest.copilotExtensions
-      ? manifest.copilotExtensions.declarativeCopilots
+    const declarativeCopilots = (manifest as any).copilotExtensions
+      ? (manifest as any).copilotExtensions.declarativeCopilots
       : manifest.copilotAgents?.declarativeAgents;
     // Copilot GPT
     if (declarativeCopilots?.length && declarativeCopilots[0].file) {

@@ -1,37 +1,38 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-import {
-  Result,
-  FxError,
-  ok,
-  err,
-  Platform,
-  ManifestUtil,
-  Colors,
-  TeamsAppManifest,
-} from "@microsoft/teamsfx-api";
 import { hooks } from "@feathersjs/hooks/lib";
-import { Service } from "typedi";
-import { EOL } from "os";
+import {
+  Colors,
+  err,
+  FxError,
+  ManifestUtil,
+  ok,
+  Platform,
+  Result,
+  TeamsManifest,
+  TeamsManifestLatest,
+} from "@microsoft/teamsfx-api";
 import { merge } from "lodash";
-import { StepDriver, ExecutionResult } from "../interface/stepDriver";
-import { DriverContext } from "../interface/commonArgs";
-import { WrapDriverContext } from "../util/wrapUtil";
-import { ValidateManifestArgs } from "./interfaces/ValidateManifestArgs";
-import { addStartAndEndTelemetry } from "../middleware/addStartAndEndTelemetry";
-import { TelemetryPropertyKey } from "./utils/telemetry";
-import { AppStudioResultFactory } from "./results";
-import { AppStudioError } from "./errors";
-import { manifestUtils } from "./utils/ManifestUtils";
-import { getDefaultString, getLocalizedString } from "../../../common/localizeUtils";
-import { HelpLinks } from "../../../common/constants";
-import { getAbsolutePath } from "../../utils/common";
-import { SummaryConstant } from "../../configManager/constant";
-import { InvalidActionInputError } from "../../../error/common";
+import { EOL } from "os";
 import path from "path";
+import { Service } from "typedi";
+import { HelpLinks } from "../../../common/constants";
+import { getDefaultString, getLocalizedString } from "../../../common/localizeUtils";
+import { InvalidActionInputError } from "../../../error/common";
+import { SummaryConstant } from "../../configManager/constant";
+import { getAbsolutePath } from "../../utils/common";
+import { DriverContext } from "../interface/commonArgs";
+import { ExecutionResult, StepDriver } from "../interface/stepDriver";
+import { addStartAndEndTelemetry } from "../middleware/addStartAndEndTelemetry";
+import { WrapDriverContext } from "../util/wrapUtil";
+import { AppStudioError } from "./errors";
+import { ValidateManifestArgs } from "./interfaces/ValidateManifestArgs";
+import { AppStudioResultFactory } from "./results";
 import { copilotGptManifestUtils } from "./utils/CopilotGptManifestUtils";
+import { manifestUtils } from "./utils/ManifestUtils";
 import { pluginManifestUtils } from "./utils/PluginManifestUtils";
+import { TelemetryPropertyKey } from "./utils/telemetry";
 
 const actionName = "teamsApp/validateManifest";
 
@@ -68,7 +69,7 @@ export class ValidateManifestDriver implements StepDriver {
     if (manifestRes.isErr()) {
       return err(manifestRes.error);
     }
-    const manifest = manifestRes.value;
+    const manifest = manifestRes.value as TeamsManifestLatest;
 
     let manifestValidationResult;
     const telemetryProperties: Record<string, string> = {};
@@ -120,11 +121,11 @@ export class ValidateManifestDriver implements StepDriver {
     let declarativeCopilotValidationResult;
     let pluginValidationResult;
     let pluginPath = "";
-    if (manifest.copilotExtensions || manifest.copilotAgents) {
+    if ((manifest as any).copilotExtensions || manifest.copilotAgents) {
       // plugin
-      const plugins = manifest.copilotExtensions
-        ? manifest.copilotExtensions.plugins
-        : manifest.copilotAgents!.plugins;
+      const plugins = (manifest as any).copilotExtensions
+        ? (manifest as any).copilotExtensions.plugins
+        : (manifest as any).copilotAgents!.plugins;
       if (plugins?.length && plugins[0].file) {
         pluginPath = path.join(path.dirname(manifestPath), plugins[0].file);
 
@@ -145,8 +146,8 @@ export class ValidateManifestDriver implements StepDriver {
       }
 
       // Declarative Copilot
-      const declarativeCopilots = manifest.copilotExtensions
-        ? manifest.copilotExtensions.declarativeCopilots
+      const declarativeCopilots = (manifest as any).copilotExtensions
+        ? (manifest as any).copilotExtensions.declarativeCopilots
         : manifest.copilotAgents!.declarativeAgents;
       if (declarativeCopilots?.length && declarativeCopilots[0].file) {
         const declarativeCopilotPath = path.join(
@@ -399,7 +400,7 @@ export class ValidateManifestDriver implements StepDriver {
   public async validateLocalizatoinFiles(
     args: ValidateManifestArgs,
     context: WrapDriverContext,
-    manifest: TeamsAppManifest
+    manifest: TeamsManifestLatest
   ): Promise<Result<{ error: string[]; filePath?: string }, FxError>> {
     if (
       manifest.localizationInfo?.additionalLanguages?.length == 0 &&
@@ -435,7 +436,7 @@ export class ValidateManifestDriver implements StepDriver {
       if (resolvedLocFileRes.isErr()) {
         return err(resolvedLocFileRes.error);
       }
-      const localizationFile = JSON.parse(resolvedLocFileRes.value) as TeamsAppManifest;
+      const localizationFile = JSON.parse(resolvedLocFileRes.value) as TeamsManifest;
       try {
         const schema = await ManifestUtil.fetchSchema(localizationFile);
         // the current localization schema has invalid regex sytax, we need to manually fix the properties temporarily
