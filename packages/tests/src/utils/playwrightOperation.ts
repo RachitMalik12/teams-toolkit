@@ -1232,7 +1232,15 @@ export async function validateReactOutlookTab(
   await RetryHandler.retry(async () => {
     await Promise.all([page.goto(url), page.waitForNavigation()]);
     await page.waitForTimeout(Timeout.longTimeWait);
-    await page.waitForSelector('div[aria-label="hosted-app-tabs"]');
+    try{
+      await page.waitForSelector('div[aria-label="hosted-app-tabs"]');
+    } catch (error) {
+      await page.screenshot({
+        path: getPlaywrightScreenshotPath("error"),
+        fullPage: true,
+      });
+      throw error;
+    }    
   }, 3);
 
   try {
