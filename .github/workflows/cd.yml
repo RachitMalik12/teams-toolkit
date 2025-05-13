@@ -15,6 +15,7 @@ on:
         type: string
         required: false
         description: "Please enter the package names you want to publish, such as cli, vscode, ui, sdk, server and template. Please separate multiple entries with spaces"
+        default: ""
   schedule:
     - cron: "0 16 * * *"
 
@@ -85,19 +86,19 @@ jobs:
       - name: Setup npm registry
         run: |
           echo "${{ secrets.NPMRC }}" > ~/.npmrc
+      
+      - name: Setup git
+        run: |
+          git config --global user.name 'adashen'
+          git config --global user.email 'shenwe@microsoft.com'
 
       - name: manage pkgs to release
-        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.pkgs }}
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         run: bash .github/scripts/lerna.sh ${{github.event.inputs.pkgs}}
 
       - name: Setup project
         run: |
           npm run setup
-
-      - name: Setup git
-        run: |
-          git config --global user.name 'adashen'
-          git config --global user.email 'shenwe@microsoft.com'
 
       - name: release alpha npm packages to npmjs.org
         if: ${{ github.ref == 'refs/heads/dev' }}
