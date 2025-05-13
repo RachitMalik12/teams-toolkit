@@ -1236,10 +1236,6 @@ export async function validateReactOutlookTab(
   }, 3);
 
   try {
-    const frameElementHandle = await page.waitForSelector(
-      'iframe[data-tid="app-host-iframe"]'
-    );
-    const frame = await frameElementHandle?.contentFrame();
     if (includeFunction) {
       await RetryHandler.retry(async () => {
         console.log("Before popup");
@@ -1254,7 +1250,7 @@ export async function validateReactOutlookTab(
                 .catch(() => popup)
             )
             .catch(() => {}),
-          frame?.click('button:has-text("Call Azure Function")', {
+          page?.click('button:has-text("Call Azure Function")', {
             timeout: Timeout.playwrightAddAppButton,
             force: true,
             noWaitAfter: true,
@@ -1282,7 +1278,7 @@ export async function validateReactOutlookTab(
       await page.waitForTimeout(Timeout.shortTimeLoading);
 
       console.log("verify function info");
-      const backendElement = await frame?.waitForSelector(
+      const backendElement = await page?.waitForSelector(
         'pre:has-text("receivedHTTPRequestBody")'
       );
       const content = await backendElement?.innerText();
@@ -1291,7 +1287,7 @@ export async function validateReactOutlookTab(
       console.log("verify function info success");
     }
 
-    await frame?.waitForSelector(`b:has-text("${displayName}")`);
+    await page?.waitForSelector(`b:has-text("${displayName}")`);
   } catch (error) {
     await page.screenshot({
       path: getPlaywrightScreenshotPath("error"),
