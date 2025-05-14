@@ -1,3 +1,160 @@
+### RELEASE release/5.14...release/6.0
+### Feature Commits
+
+#### Fx-core
+- [feat: use new development url for spfx higher than 1.21](https://github.com/OfficeDev/Teams-toolkit/commit/e97de7719)
+- [feat: update default value of AddODSPKnowledge feature flag to true (#13860)](https://github.com/OfficeDev/Teams-toolkit/commit/cc6861c82)
+- [feat: add feature support for create DA in MetaOS project (#13663)](https://github.com/OfficeDev/Teams-toolkit/commit/e76462015)
+- [feat: add new weather agent template and update scaffolding ui (#13781)](https://github.com/OfficeDev/Teams-toolkit/commit/6caf5ace2)
+- [feat: support retry for provision (#13768)](https://github.com/OfficeDev/Teams-toolkit/commit/029b37f35)
+- [feat: refactor sensitivity label cache & adjust naming (#13749)](https://github.com/OfficeDev/Teams-toolkit/commit/25ce58d0e)
+- [feat: add new template and update scaffolding ui (#13729)](https://github.com/OfficeDev/Teams-toolkit/commit/c935d1668)
+- [feat: rename test tool file (#13721)](https://github.com/OfficeDev/Teams-toolkit/commit/18843e2e8)
+- [feat: upgrade app-manifest package (#13707)](https://github.com/OfficeDev/Teams-toolkit/commit/3db80d0af)
+- [feat: rename add plugin cli to add action (#13706)](https://github.com/OfficeDev/Teams-toolkit/commit/bab200ed7)
+- [feat: da with gc (#13691)](https://github.com/OfficeDev/Teams-toolkit/commit/6e5577476)
+- [feat: support manifest types for all versions (#13666)](https://github.com/OfficeDev/Teams-toolkit/commit/2b9053235)
+- [feat: rename teams app (#13646)](https://github.com/OfficeDev/Teams-toolkit/commit/c28e7831d)
+- [feat: add sharing management (#13644)](https://github.com/OfficeDev/Teams-toolkit/commit/97f727f7c)
+- [feat: upgrade fx-core and cli versions (#13636)](https://github.com/OfficeDev/Teams-toolkit/commit/bb2e4bf2a)
+- [feat: add builder name when calling builder api (#13442)](https://github.com/OfficeDev/Teams-toolkit/commit/2e9f0b9ef)
+- [feat: add search OpenAPI spec support using kiota npm package (#13610)](https://github.com/OfficeDev/Teams-toolkit/commit/57bb560fd)
+- [feat: add sensitivity cli and vsc command (#13553)](https://github.com/OfficeDev/Teams-toolkit/commit/16b866c38)
+- [feat: pick release 514 (#13601)](https://github.com/OfficeDev/Teams-toolkit/commit/d175b44de)
+- [feat: hardcode mos api endpoint and scope (#13568)](https://github.com/OfficeDev/Teams-toolkit/commit/a6718774c)
+- [feat: update oauth register/update action for new schema (#13572)](https://github.com/OfficeDev/Teams-toolkit/commit/494c6fd1e)
+- [feat: add graph connector scaffold (#13569)](https://github.com/OfficeDev/Teams-toolkit/commit/d421750d7)
+- [feat: sandboxed team for debugging (#13465)](https://github.com/OfficeDev/Teams-toolkit/commit/cc4608840)
+- [feat: update api key register logic to support new schema (#13556)](https://github.com/OfficeDev/Teams-toolkit/commit/0bb0e79e6)
+- [feat: add sensitivity label code lens (#13513)](https://github.com/OfficeDev/Teams-toolkit/commit/cd3a88aca)
+- [feat: update python project templates to support test tool debugging (#13530)](https://github.com/OfficeDev/Teams-toolkit/commit/ff8fb932d)
+- [feat: download nodejs for test tool (#13505)](https://github.com/OfficeDev/Teams-toolkit/commit/bc3c9a0e7)
+- [feat: update yaml schema to support nodejs download in devTool/install (#13516)](https://github.com/OfficeDev/Teams-toolkit/commit/fb390fa0e)
+- [feat: add sensitibity label in scaffolding (#13418)](https://github.com/OfficeDev/Teams-toolkit/commit/190dc3666)
+
+#### CLI
+- [feat: add new template and update scaffolding ui (#13729)](https://github.com/OfficeDev/Teams-toolkit/commit/c935d1668)
+- [feat: rename add plugin cli to add action (#13706)](https://github.com/OfficeDev/Teams-toolkit/commit/bab200ed7)
+- [feat: rename teams app (#13646)](https://github.com/OfficeDev/Teams-toolkit/commit/c28e7831d)
+- [feat: add sharing management (#13644)](https://github.com/OfficeDev/Teams-toolkit/commit/97f727f7c)
+- [feat: upgrade fx-core and cli versions (#13636)](https://github.com/OfficeDev/Teams-toolkit/commit/bb2e4bf2a)
+- [feat: add sensitivity cli and vsc command (#13553)](https://github.com/OfficeDev/Teams-toolkit/commit/16b866c38)
+- [feat: pick release 514 (#13601)](https://github.com/OfficeDev/Teams-toolkit/commit/d175b44de)
+- [feat: download nodejs for test tool (#13505)](https://github.com/OfficeDev/Teams-toolkit/commit/bc3c9a0e7)
+- [feat: rename add knowledge cli (#13469)](https://github.com/OfficeDev/Teams-toolkit/commit/db74b62e9)
+- [feat: add sensitibity label in scaffolding (#13418)](https://github.com/OfficeDev/Teams-toolkit/commit/190dc3666)
+
+#### Extension Toolkit
+- [feat: update default value of AddODSPKnowledge feature flag to true (#13860)](https://github.com/OfficeDev/Teams-toolkit/commit/cc6861c82)
+- [feat: add feature support for create DA in MetaOS project (#13663)](https://github.com/OfficeDev/Teams-toolkit/commit/e76462015)
+- [feat: add new weather agent template and update scaffolding ui (#13781)](https://github.com/OfficeDev/Teams-toolkit/commit/6caf5ace2)
+- [feat: refactor sensitivity label cache & adjust naming (#13749)](https://github.com/OfficeDev/Teams-toolkit/commit/25ce58d0e)
+- [feat: add new template and update scaffolding ui (#13729)](https://github.com/OfficeDev/Teams-toolkit/commit/c935d1668)
+- [feat: rename teams app (#13646)](https://github.com/OfficeDev/Teams-toolkit/commit/c28e7831d)
+- [feat: add sharing management (#13644)](https://github.com/OfficeDev/Teams-toolkit/commit/97f727f7c)
+- [feat: add sensitivity cli and vsc command (#13553)](https://github.com/OfficeDev/Teams-toolkit/commit/16b866c38)
+- [feat: add graph connector scaffold (#13569)](https://github.com/OfficeDev/Teams-toolkit/commit/d421750d7)
+- [feat: sandboxed team for debugging (#13465)](https://github.com/OfficeDev/Teams-toolkit/commit/cc4608840)
+- [feat: add sensitivity label code lens (#13513)](https://github.com/OfficeDev/Teams-toolkit/commit/cd3a88aca)
+- [feat: add sensitibity label in scaffolding (#13418)](https://github.com/OfficeDev/Teams-toolkit/commit/190dc3666)
+
+#### SDK
+- [feat: replace botbuilders with agent sdk (#13655)](https://github.com/OfficeDev/Teams-toolkit/commit/bae92504a)
+
+#### SDK React
+- [feat: replace botbuilders with agent sdk (#13655)](https://github.com/OfficeDev/Teams-toolkit/commit/bae92504a)
+
+#### .Net SDK
+- [feat: update agent sdk samples (#13738)](https://github.com/OfficeDev/Teams-toolkit/commit/9166130a3)
+
+### Fix Commits
+
+#### Fx-core
+- [fix: template properties](https://github.com/OfficeDev/Teams-toolkit/commit/d695adfed)
+- [fix: update title](https://github.com/OfficeDev/Teams-toolkit/commit/20b9880b9)
+- [fix: extend to wxp templates](https://github.com/OfficeDev/Teams-toolkit/commit/03efd2344)
+- [fix: hotfix meta-os-da template and unify project id](https://github.com/OfficeDev/Teams-toolkit/commit/a4d056b8a)
+- [fix: default folder name](https://github.com/OfficeDev/Teams-toolkit/commit/d188162f5)
+- [fix: ut](https://github.com/OfficeDev/Teams-toolkit/commit/3c01d9690)
+- [fix: update](https://github.com/OfficeDev/Teams-toolkit/commit/99e28ef5b)
+- [fix: missing env error message](https://github.com/OfficeDev/Teams-toolkit/commit/d9814b260)
+- [fix: missing env error message](https://github.com/OfficeDev/Teams-toolkit/commit/97b3dac25)
+- [fix: yaml file name in error message](https://github.com/OfficeDev/Teams-toolkit/commit/7fd3ffb2d)
+- [fix: mos api telemetry url classification](https://github.com/OfficeDev/Teams-toolkit/commit/99f855a33)
+- [fix: use new dev url for import spfx](https://github.com/OfficeDev/Teams-toolkit/commit/2ee330bde)
+- [fix: fill devurl template variable for all situations](https://github.com/OfficeDev/Teams-toolkit/commit/447c70c3e)
+- [fix: sandbox v4 file filter](https://github.com/OfficeDev/Teams-toolkit/commit/2e87033a5)
+- [fix: display playground for test tool env (#13854)](https://github.com/OfficeDev/Teams-toolkit/commit/7b54eb391)
+- [fix: cherry pick hotfixes for vs17.14 p6 (#13811)](https://github.com/OfficeDev/Teams-toolkit/commit/6b4beae98)
+- [fix: fix the missing root folder when converting existing Office add-ins (#13825)](https://github.com/OfficeDev/Teams-toolkit/commit/18c4d7faf)
+- [fix: cli support weather agent template and ui string (#13834)](https://github.com/OfficeDev/Teams-toolkit/commit/d58225eba)
+- [fix: question model traverse (#13793)](https://github.com/OfficeDev/Teams-toolkit/commit/18ed8019e)
+- [fix: install app after app start to see welcome message (#13746)](https://github.com/OfficeDev/Teams-toolkit/commit/b2a600c50)
+- [fix: update mos telemetry url pattern (#13772)](https://github.com/OfficeDev/Teams-toolkit/commit/1139c4ba9)
+- [fix: backward operation in traverse question model (#13734)](https://github.com/OfficeDev/Teams-toolkit/commit/d868a28c4)
+- [fix: no valid app catelog error message (#13695)](https://github.com/OfficeDev/Teams-toolkit/commit/85ded37d5)
+- [fix: compatibility of references to old yml file (#13682)](https://github.com/OfficeDev/Teams-toolkit/commit/b4a226b4c)
+- [fix: cli package name (#13683)](https://github.com/OfficeDev/Teams-toolkit/commit/b52b4c202)
+- [fix: question model traverse algorithm (#13658)](https://github.com/OfficeDev/Teams-toolkit/commit/51f911fb0)
+- [fix: get weburl instead of constructing it (#13643)](https://github.com/OfficeDev/Teams-toolkit/commit/ee57eee05)
+- [fix: add telemetry and integration test api (#13599)](https://github.com/OfficeDev/Teams-toolkit/commit/8848410aa)
+- [fix: cli insensitive (#13608)](https://github.com/OfficeDev/Teams-toolkit/commit/e73154f74)
+- [fix: add sso not work in vs (#13579)](https://github.com/OfficeDev/Teams-toolkit/commit/87bda75e9)
+- [fix: input password type (#13457)](https://github.com/OfficeDev/Teams-toolkit/commit/cf38f9904)
+- [fix: new telemetry property not work (#13534)](https://github.com/OfficeDev/Teams-toolkit/commit/9e9722c66)
+- [fix: hide embedded knowledge and adjust DA manifest version. [cherry-pick] (#13529)](https://github.com/OfficeDev/Teams-toolkit/commit/cccf8ac7c)
+- [fix: replace mt 1p app (#13518)](https://github.com/OfficeDev/Teams-toolkit/commit/8783a984f)
+- [fix: replace "knowledge" with "capability" (#13464)](https://github.com/OfficeDev/Teams-toolkit/commit/9008e3cf6)
+- [fix: axios 1.8.3 (#13461)](https://github.com/OfficeDev/Teams-toolkit/commit/35c9e1ded)
+- [fix: undefined path in driver context (#13444)](https://github.com/OfficeDev/Teams-toolkit/commit/d17e709e2)
+- [fix: ai plugin manifest error when zip app package  (#13445)](https://github.com/OfficeDev/Teams-toolkit/commit/1ce773dd2)
+- [fix: update (#13438)](https://github.com/OfficeDev/Teams-toolkit/commit/ff0acdd81)
+- [fix: mos api url pattern (#13426)](https://github.com/OfficeDev/Teams-toolkit/commit/b67207c1a)
+- [fix: properties of undefined (reading 'replace') when add plugin (#13424)](https://github.com/OfficeDev/Teams-toolkit/commit/fe99568ab)
+- [fix: classify mos api name in telemetry (#13419)](https://github.com/OfficeDev/Teams-toolkit/commit/af0c58b84)
+- [fix: add wxp template metadata (#13415)](https://github.com/OfficeDev/Teams-toolkit/commit/ce75700ab)
+- [fix: show missing env error for unresolved variables (#13400)](https://github.com/OfficeDev/Teams-toolkit/commit/4af7d400c)
+- [fix: add telemerty and double confirm content (#13395)](https://github.com/OfficeDev/Teams-toolkit/commit/eb9947f17)
+- [fix: cli project type option (#13390)](https://github.com/OfficeDev/Teams-toolkit/commit/47add0825)
+
+#### CLI
+- [fix: cli support weather agent template and ui string (#13834)](https://github.com/OfficeDev/Teams-toolkit/commit/d58225eba)
+- [fix: remove deprecated hint (#13684)](https://github.com/OfficeDev/Teams-toolkit/commit/b822c3be4)
+- [fix: cli sp login output breaks (#13647)](https://github.com/OfficeDev/Teams-toolkit/commit/c139a1568)
+- [fix: cli insensitive (#13608)](https://github.com/OfficeDev/Teams-toolkit/commit/e73154f74)
+
+#### Extension Toolkit
+- [fix: show changelog for fresh installation](https://github.com/OfficeDev/Teams-toolkit/commit/d4ee76fb8)
+- [fix: ut](https://github.com/OfficeDev/Teams-toolkit/commit/33cd4e0af)
+- [fix: copilot debug compatibility issue](https://github.com/OfficeDev/Teams-toolkit/commit/b30e966bc)
+- [fix: display playground for test tool env (#13854)](https://github.com/OfficeDev/Teams-toolkit/commit/7b54eb391)
+- [fix: switch to ask mode before preparing the query (#13794)](https://github.com/OfficeDev/Teams-toolkit/commit/a1a76e122)
+- [fix: da walkthrough (#13792)](https://github.com/OfficeDev/Teams-toolkit/commit/750bfb2a2)
+- [fix: gcet walkthrough svg (#13789)](https://github.com/OfficeDev/Teams-toolkit/commit/dd5c8a09a)
+- [fix: install app after app start to see welcome message (#13746)](https://github.com/OfficeDev/Teams-toolkit/commit/b2a600c50)
+- [fix: launch browser message (#13736)](https://github.com/OfficeDev/Teams-toolkit/commit/03cc04222)
+- [fix: naming (#13719)](https://github.com/OfficeDev/Teams-toolkit/commit/aa1e13280)
+- [fix: remove deprecated hint (#13684)](https://github.com/OfficeDev/Teams-toolkit/commit/b822c3be4)
+- [fix: compatibility of references to old yml file (#13682)](https://github.com/OfficeDev/Teams-toolkit/commit/b4a226b4c)
+- [fix: get weburl instead of constructing it (#13643)](https://github.com/OfficeDev/Teams-toolkit/commit/ee57eee05)
+- [fix: telemetry for teams agent pre-check (#13582)](https://github.com/OfficeDev/Teams-toolkit/commit/490797147)
+- [fix: fix kiota settings issue (#13508)](https://github.com/OfficeDev/Teams-toolkit/commit/b500b250d)
+- [fix: cdp client retry loop on dev (#13480)](https://github.com/OfficeDev/Teams-toolkit/commit/dcd1dc90f)
+- [fix: hide add web part command for non-spfx project (#13478)](https://github.com/OfficeDev/Teams-toolkit/commit/b36d4d561)
+- [fix: upgrade axios dependency (#13473)](https://github.com/OfficeDev/Teams-toolkit/commit/0bd979a88)
+- [fix: replace "knowledge" with "capability" (#13464)](https://github.com/OfficeDev/Teams-toolkit/commit/9008e3cf6)
+- [fix: add cdp client log (#13471)](https://github.com/OfficeDev/Teams-toolkit/commit/288bbae46)
+- [fix: cdp client log (#13463)](https://github.com/OfficeDev/Teams-toolkit/commit/c64a8ee73)
+- [fix: add telemerty and double confirm content (#13395)](https://github.com/OfficeDev/Teams-toolkit/commit/eb9947f17)
+
+#### SDK
+- [fix: upgrade axios dependency (#13473)](https://github.com/OfficeDev/Teams-toolkit/commit/0bd979a88)
+
+#### SDK React
+
+
+#### .Net SDK
+
 # Teams Toolkit Pre-release
 
 ## Changelog
