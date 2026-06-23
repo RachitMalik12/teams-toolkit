@@ -4,6 +4,43 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import { fetchSchema, SchemaTypeEnum } from "./fetcher";
 import { retrieveResource } from "./retriever";
+import { execFile } from "child_process";
+import { promisify } from "util";
+
+const execFileAsync = promisify(execFile);
+
+/**
+ * Resolve the wiqd binary path. Checks WIQD_PATH env var first, then falls
+ * back to "wiqd" on PATH.
+ */
+function resolveWiqdBin(): string {
+  return process.env.WIQD_PATH || "wiqd";
+}
+
+/**
+ * Run a wiqd CLI command and return structured output.
+ */
+async function runWiqd(
+  args: string[],
+  cwd?: string
+): Promise<{ success: boolean; stdout: string; stderr: string; exitCode: number }> {
+  const bin = resolveWiqdBin();
+  try {
+    const { stdout, stderr } = await execFileAsync(bin, args, {
+      cwd: cwd || process.cwd(),
+      timeout: 120_000,
+      windowsHide: true,
+    });
+    return { success: true, stdout, stderr, exitCode: 0 };
+  } catch (err: any) {
+    return {
+      success: false,
+      stdout: err.stdout || "",
+      stderr: err.stderr || err.message || "",
+      exitCode: err.code ?? 1,
+    };
+  }
+}
 
 export function createServer(): McpServer {
   const server = new McpServer({
@@ -95,6 +132,153 @@ export function createServer(): McpServer {
             text: result,
           },
         ],
+      };
+    }
+  );
+
+  // ---------------------------------------------------------------------------
+  // wiqd Lifecycle Tools — enhanced agent lifecycle management
+  // ---------------------------------------------------------------------------
+
+  server.tool(
+    "validate_agent",
+    "Validate a declarative agent project using wiqd's enhanced validation rules. " +
+      "Goes beyond schema validation to catch semantic errors, missing capabilities, " +
+      "and configuration issues. Use this before provisioning or publishing an agent.",
+    {
+      project_path: z
+        .string()
+        .describe(
+          "Absolute path to the declarative agent project root (must contain appPackage/declarativeAgent.json or m365agents.yml)"
+        ),
+    },
+    async ({ project_path }) => {
+      const result = await runWiqd(
+        ["agent", "validate", "--path", project_path, "--json"],
+        project_path
+      );
+
+      return {
+        content: [
+          {
+            type: "text",
+            text: result.success
+              ? `Validation passed.\n\n${result.stdout}`
+              : `Validation failed (exit ${result.exitCode}).\n\n${result.stdout || result.stderr}`,
+          },
+        ],
+      };
+    }
+  );
+
+  server.tool(
+    "provision_agent",
+    "Provision a declarative agent to a target environment. Creates the required " +
+      "cloud resources and registers the agent with the M365 platform. Requires prior " +
+      "authentication via 'wiqd auth login'.",
+    {
+      project_path: z
+        .string()
+        .describe("Absolute path to the declarative agent project root"),
+      environment: z
+        .string()
+        .optional()
+        .describe(
+          "Target environment name (e.g., 'dev', 'local'). Defaults to the project's default env."
+        ),
+    },
+    async ({ project_path, environment }) => {
+      const args = ["agent", "provision", "--path", project_path, "--json"];
+      if (environment) {
+        args.push("--env", environment);
+      }
+
+      const result = await runWiqd(args, project_path);
+
+      return {
+        content: [
+          {
+            type: "text",
+            text: result.success
+              ? `Agent provisioned successfully.\n\n${result.stdout}`
+              : `Provisioning failed (exit ${result.exitCode}).\n\n${result.stdout || result.stderr}`,
+          },
+        ],
+      };
+    }
+  );
+
+  server.tool(
+    "publish_agent",
+    "Publish a provisioned declarative agent to the M365 app catalog so users can " +
+      "install and interact with it. The agent must be provisioned first.",
+    {
+      project_path: z
+        .string()
+        .describe("Absolute path to the declarative agent project root"),
+      environment: z
+        .string()
+        .optional()
+        .describe("Target environment name. Defaults to the project's default env."),
+    },
+    async ({ project_path, environment }) => {
+      const args = ["agent", "publish", "--path", project_path, "--json"];
+      if (environment) {
+        args.push("--env", environment);
+      }
+
+      const result = await runWiqd(args, project_path);
+
+      return {
+        content: [
+          {
+            type: "text",
+            text: result.success
+              ? `Agent published successfully.\n\n${result.stdout}`
+              : `Publishing failed (exit ${result.exitCode}).\n\n${result.stdout || result.stderr}`,
+          },
+        ],
+      };
+    }
+  );
+
+  server.tool(
+    "agent_lifecycle",
+    "Run the full declarative agent lifecycle: validate, provision, publish. " +
+      "Stops at the first failure. Use this for a complete end-to-end deployment.",
+    {
+      project_path: z
+        .string()
+        .describe("Absolute path to the declarative agent project root"),
+      environment: z
+        .string()
+        .optional()
+        .describe("Target environment name. Defaults to the project's default env."),
+    },
+    async ({ project_path, environment }) => {
+      const steps = ["validate", "provision", "publish"];
+      const results: string[] = [];
+
+      for (const step of steps) {
+        const args = ["agent", step, "--path", project_path, "--json"];
+        if (environment && step !== "validate") {
+          args.push("--env", environment);
+        }
+
+        const result = await runWiqd(args, project_path);
+        results.push(`[${step}] ${result.success ? "PASS" : "FAIL"} (exit ${result.exitCode})`);
+
+        if (!result.success) {
+          results.push(`\nStopped at ${step}. Error:\n${result.stdout || result.stderr}`);
+          return {
+            content: [{ type: "text" as const, text: results.join("\n") }],
+          };
+        }
+      }
+
+      results.push("\nFull lifecycle completed successfully!");
+      return {
+        content: [{ type: "text" as const, text: results.join("\n") }],
       };
     }
   );

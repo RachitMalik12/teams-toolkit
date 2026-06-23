@@ -24,6 +24,7 @@ import { getSystemInputs } from "../utils/systemEnvUtils";
 import { getTriggerFromProperty } from "../utils/telemetryUtils";
 import { runCommand } from "./sharedOpts";
 import { SyncManifestInputs } from "@microsoft/teamsfx-core";
+import { offerWiqdEnhancedValidation } from "./wiqdBridge";
 
 export async function validateManifestHandler(args?: any[]): Promise<Result<null, FxError>> {
   ExtTelemetry.sendTelemetryEvent(
@@ -32,7 +33,14 @@ export async function validateManifestHandler(args?: any[]): Promise<Result<null
   );
 
   const inputs = getSystemInputs();
-  return await runCommand(Stage.validateApplication, inputs);
+  const result = await runCommand(Stage.validateApplication, inputs);
+
+  // After ATK validation, offer wiqd enhanced validation
+  if (result.isOk()) {
+    void offerWiqdEnhancedValidation(workspaceUri?.fsPath);
+  }
+
+  return result;
 }
 
 export async function syncManifestHandler(...args: any[]): Promise<Result<null, FxError>> {
